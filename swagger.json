@@ -1,0 +1,25 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "fozdeal Backend Service",
+        "description": "fozdeal Backend Service"
+    },
+    "schemes": ["http", "https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "securityDefinitions": {
+        "auth_token": {
+            "type": "apiKey",
+            "name": "admin-token",
+            "in": "header"
+        },
+        "service_token": {
+            "type": "apiKey",
+            "name": "storefront-token",
+            "in": "header"
+        }
+    },
+    "paths": {},
+    "definitions": {}
+}

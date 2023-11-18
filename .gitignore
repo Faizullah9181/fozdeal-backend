@@ -1,0 +1,12 @@
+node_modules/
+logs/*.log
+pm2-prod.json
+pm2-alpha.json
+.idea/
+dist/
+docs/
+.scannerwork
+.env
+package-lock.json
+.vscode
+database.sqlite3
