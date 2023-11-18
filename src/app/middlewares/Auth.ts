@@ -13,7 +13,7 @@ export default class Auth {
     ) {
         try {
             //check if authorization header present
-            const token = req.headers['super-admin-token'] as string;
+            const token = req.headers['user-token'] as string;
             if (!token)
                 return sendErrorResponse(
                     res,
@@ -51,7 +51,7 @@ export default class Auth {
     static async adminToken(req: Request, res: Response, next: NextFunction) {
         try {
             //check if authorization header present
-            const token = req.headers['admin-token'] as string;
+            const token = req.headers['user-token'] as string;
             if (!token)
                 return sendErrorResponse(
                     res,

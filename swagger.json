@@ -16,16 +16,6 @@
         "application/json"
     ],
     "securityDefinitions": {
-        "super-admin-token": {
-            "type": "apiKey",
-            "name": "super-admin-token",
-            "in": "header"
-        },
-        "admin-token": {
-            "type": "apiKey",
-            "name": "admin-token",
-            "in": "header"
-        },
         "user-token": {
             "type": "apiKey",
             "name": "user-token",
