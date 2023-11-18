@@ -15,6 +15,25 @@ class UserRepository extends CommonRepository {
             returning: true
         });
     }
+
+    async getAllUsers() {
+        return User.findAll({
+            where: {
+                role: ['admin', 'entrepreneur', 'investor']
+            }
+        });
+    }
+
+    async UpdateActivation(data: any, actiVationStatus: number) {
+        return User.update(
+            { isActive: actiVationStatus },
+            {
+                where: {
+                    id: data.user_id
+                }
+            }
+        );
+    }
 }
 
 export default new UserRepository();

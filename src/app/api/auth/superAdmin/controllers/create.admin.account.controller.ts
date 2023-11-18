@@ -47,7 +47,8 @@ export default class CreateAdminController extends MasterController {
             first_name,
             last_name,
             email,
-            password
+            password,
+            role: 'admin'
         });
         return new this.ResponseBuilder(
             StatusCodes.SUCCESS,

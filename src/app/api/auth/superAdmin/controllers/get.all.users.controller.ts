@@ -3,12 +3,14 @@ import { SuccessMessages } from '../../../../enums/SuccessMessages';
 import superAdminService from '../services/super.admin.service';
 const { MasterController } = require('@orca/base-packages');
 
-export default class GetSuperAdminDetails extends MasterController {
+export default class GetAllUsers extends MasterController {
     static doc() {
         return {
             tags: ['Auth'],
-            description: 'Get Details  For All Super Admins',
-            summary: 'Get Details  For All Super Admins'
+            description:
+                'Get All Users Including Admins , Entrepreneurs , Investors',
+            summary:
+                'Get All Users Including Admins , Entrepreneurs , Investors'
         };
     }
 
@@ -17,9 +19,7 @@ export default class GetSuperAdminDetails extends MasterController {
     }
 
     async controller() {
-        const { user } = this.data;
-
-        const response = await superAdminService.getSuperAdmin(user.id);
+        const response = await superAdminService.getAllUsers();
         return new this.ResponseBuilder(
             StatusCodes.SUCCESS,
             response,

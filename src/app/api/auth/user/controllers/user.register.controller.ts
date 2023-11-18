@@ -32,7 +32,7 @@ export default class UserRegisterController extends MasterController {
                 first_name: Joi.string().required(),
                 last_name: Joi.string().required(),
                 email: Joi.string().email().required(),
-                password: Joi.string().min(8).max(20).required(),
+                password: Joi.string().min(6).max(20).required(),
                 gender: Joi.string().required(),
                 user_type: Joi.string()
                     .valid(Roles.ENTERPRENEUR, Roles.INVESTOR)

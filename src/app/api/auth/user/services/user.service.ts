@@ -10,6 +10,11 @@ class UserService {
         let user = result[0];
         return CryptoTokenService.makeToken(user, data.role);
     }
+
+    async getUser(data) {
+        const result = await userRepository.findUser(data);
+        return result;
+    }
 }
 
 export default new UserService();

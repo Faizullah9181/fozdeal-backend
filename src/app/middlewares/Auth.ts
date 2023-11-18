@@ -6,7 +6,7 @@ import * as CryptoJS from 'crypto-js';
 import { StatusCodes } from '../enums/StatusCode';
 
 export default class Auth {
-    static async SuperAdminToken(
+    static async superAdminToken(
         req: Request,
         res: Response,
         next: NextFunction
@@ -25,9 +25,7 @@ export default class Auth {
 
             const cu = CryptoJS.AES.decrypt(token, process.env.CRYPTO_KEY);
             const superAdmin = JSON.parse(cu.toString(CryptoJS.enc.Utf8));
-
-            console.log(!superAdmin.id && superAdmin.role !== 'superAdmin');
-            if (!superAdmin.id && superAdmin.role !== 'superAdmin') {
+            if (superAdmin.role !== 'super-admin') {
                 return sendErrorResponse(
                     res,
                     AuthenticationErrorCodes.BAUTH1001,
@@ -50,7 +48,7 @@ export default class Auth {
         }
     }
 
-    static async AdminToken(req: Request, res: Response, next: NextFunction) {
+    static async adminToken(req: Request, res: Response, next: NextFunction) {
         try {
             //check if authorization header present
             const token = req.headers['admin-token'] as string;
@@ -65,7 +63,7 @@ export default class Auth {
 
             const cu = CryptoJS.AES.decrypt(token, process.env.CRYPTO_KEY);
             const admin = JSON.parse(cu.toString(CryptoJS.enc.Utf8));
-            if (!admin.id && admin.role !== 'admin') {
+            if (admin.role !== 'admin') {
                 return sendErrorResponse(
                     res,
                     AuthenticationErrorCodes.BAUTH1001,
@@ -103,12 +101,7 @@ export default class Auth {
 
             const cu = CryptoJS.AES.decrypt(token, process.env.CRYPTO_KEY);
             const user = JSON.parse(cu.toString(CryptoJS.enc.Utf8));
-
-            if (
-                !user.id &&
-                user.role !== 'entrepreneur' &&
-                user.role !== 'investor'
-            ) {
+            if (user.role !== 'entrepreneur' && user.role !== 'investor') {
                 return sendErrorResponse(
                     res,
                     AuthenticationErrorCodes.BAUTH1001,

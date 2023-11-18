@@ -2,6 +2,10 @@ import UserRegisterController from '../api/auth/user/controllers/user.register.c
 import UserLoginController from '../api/auth/login/controller/global.login.controller';
 import GetSuperAdminDetails from '../api/auth/superAdmin/controllers/get.super.admin.controller';
 import CreateAdminController from '../api/auth/superAdmin/controllers/create.admin.account.controller';
+import GetUserDetails from '../api/auth/user/controllers/user.details.controller';
+import GetAllUsers from '../api/auth/superAdmin/controllers/get.all.users.controller';
+import UpdateActivationController from '../api/auth/superAdmin/controllers/updateActivation.users.account.controller';
+('../api/auth/superAdmin/controllers/updateActivation.users.account.controller');
 import Auth from '../middlewares/Auth';
 module.exports = function (app) {
     UserRegisterController.post(app, '/api/auth/v1/user/register', []);
@@ -9,12 +13,20 @@ module.exports = function (app) {
     UserLoginController.post(app, '/api/auth/v1/user/login', []);
 
     GetSuperAdminDetails.get(app, '/api/auth/v1/user/superAdmin/details', [
-        Auth.userToken
+        Auth.superAdminToken
     ]);
 
     CreateAdminController.post(
         app,
         '/api/auth/v1/user/superAdmin/createAdmin',
-        [Auth.SuperAdminToken]
+        [Auth.superAdminToken]
     );
+
+    GetUserDetails.get(app, '/api/auth/v1/user/details', [Auth.userToken]);
+
+    GetAllUsers.get(app, '/api/auth/v1/user/allUsers', [Auth.superAdminToken]);
+
+    UpdateActivationController.post(app, '/api/auth/v1/user/updateActivation', [
+        Auth.superAdminToken
+    ]);
 };
