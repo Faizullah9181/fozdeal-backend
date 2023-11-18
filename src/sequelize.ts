@@ -8,7 +8,7 @@ let options = {} as SequelizeOptions;
 options.database = process.env.WRITE_DB_NAME;
 options.models = [path.join(__dirname, '/app/models')];
 // options.logging = false;
-options.dialect = 'mysql';
+options.dialect = 'postgres';
 options.logging = console.log;
 options.operatorsAliases = {
     $eq: Op.eq,
@@ -55,9 +55,9 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 if (process.env.NODE_ENV !== 'test') {
-    options.dialect = 'mysql';
+    options.dialect = 'postgres';
     options.dialectOptions = {
-        ssl: false
+        ssl: true
     };
     options.port = Number(process.env.WRITE_DB_PORT);
     // options.logging = async function (query: any, value: any) {

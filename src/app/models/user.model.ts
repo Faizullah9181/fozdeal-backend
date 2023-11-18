@@ -62,7 +62,7 @@ export default class User extends Model<User> {
     gender: string;
 
     @Column({
-        type: DataType.TINYINT,
+        type: DataType.INTEGER,
         allowNull: true,
         defaultValue: 1
     })

@@ -60,6 +60,7 @@
         "opentracing": "^0.14.5",
         "os": "^0.1.1",
         "passport": "^0.6.0",
+        "pg": "^8.11.3",
         "pidusage": "^2.0.21",
         "prom-client": "^14.0.1",
         "razorpay": "^2.8.4",

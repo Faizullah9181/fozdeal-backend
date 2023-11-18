@@ -67,7 +67,7 @@ export default class Project extends Model<Project> {
     project_category: CategoryStatus;
 
     @Column({
-        type: DataType.TINYINT,
+        type: DataType.INTEGER,
         allowNull: true,
         defaultValue: 1
     })
