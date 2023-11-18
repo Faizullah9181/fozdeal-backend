@@ -5,18 +5,30 @@
         "title": "fozdeal Backend Service",
         "description": "fozdeal Backend Service"
     },
-    "schemes": ["http", "https"],
-    "consumes": ["application/json"],
-    "produces": ["application/json"],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
     "securityDefinitions": {
-        "auth_token": {
+        "super-admin-token": {
+            "type": "apiKey",
+            "name": "super-admin-token",
+            "in": "header"
+        },
+        "admin-token": {
             "type": "apiKey",
             "name": "admin-token",
             "in": "header"
         },
-        "service_token": {
+        "user-token": {
             "type": "apiKey",
-            "name": "storefront-token",
+            "name": "user-token",
             "in": "header"
         }
     },

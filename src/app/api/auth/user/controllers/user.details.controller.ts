@@ -6,7 +6,7 @@ const { MasterController } = require('@orca/base-packages');
 export default class GetUserDetails extends MasterController {
     static doc() {
         return {
-            tags: ['Auth'],
+            tags: ['Profile'],
             description: 'Get Details  For user',
             summary: 'Get Details  For user'
         };
