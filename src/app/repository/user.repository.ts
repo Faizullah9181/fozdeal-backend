@@ -34,6 +34,27 @@ class UserRepository extends CommonRepository {
             }
         );
     }
+
+    async updateUser(data: any, filter?: any) {
+        await User.update(data, {
+            where: {
+                id: filter
+            }
+        });
+
+        return User.findOne({
+            where: {
+                id: filter
+            },
+            attributes: [
+                'first_name',
+                'last_name',
+                'phone',
+                'about',
+                'country_code'
+            ]
+        });
+    }
 }
 
 export default new UserRepository();

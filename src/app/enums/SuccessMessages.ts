@@ -8,5 +8,8 @@ export enum SuccessMessages {
     USER_DETAILS_FETCHED_SUCCESS = 'User details fetched successfully',
     SUPER_ADMIN_DETAILS_FETCHED_SUCCESS = 'Super admin details fetched successfully',
     ADMIN_DETAILS_FETCHED_SUCCESS = 'Admin details fetched successfully',
-    UPDATE_USER_ACTIVATION_STATUS = 'User activation status updated successfully'
+    UPDATE_USER_ACTIVATION_STATUS = 'User activation status updated successfully',
+    UPDATE_SUPER_ADMIN_PROFILE = 'Super admin profile updated successfully',
+    UPDATE_ADMIN_PROFILE = 'Admin profile updated successfully',
+    UPDATE_USER_PROFILE = 'User profile updated successfully'
 }
