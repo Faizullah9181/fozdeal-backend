@@ -25,7 +25,7 @@ class ProjectService {
         const projectMedia = data.project_media.map((media: any) => {
             return {
                 project_id: id,
-                image_url: media.image_url,
+                url: media.url,
                 media_type: media.media_type,
                 user_id: data.user_id
             };

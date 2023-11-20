@@ -16,7 +16,7 @@ export default class ProjectMedia extends Model<ProjectMedia> {
         type: DataType.STRING(128),
         allowNull: false
     })
-    image_url: string;
+    url: string;
 
     @ForeignKey(() => User)
     @Column({

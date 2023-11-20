@@ -53,12 +53,13 @@ export default class CreateProjectController extends MasterController {
                     .required(),
                 project_media: Joi.array().items(
                     Joi.object().keys({
-                        image_url: Joi.string().required(),
+                        url: Joi.string().required(),
                         media_type: Joi.string()
                             .valid(
                                 ProjectMediaStatus.BANNER,
                                 ProjectMediaStatus.PRODUCTIMAGE,
-                                ProjectMediaStatus.PROJECT_ATTACHMENT
+                                ProjectMediaStatus.PROJECT_ATTACHMENT,
+                                ProjectMediaStatus.ISFEATURED
                             )
                             .required()
                     })
