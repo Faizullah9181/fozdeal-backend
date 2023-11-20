@@ -16,7 +16,7 @@ export default class ProjectMedia extends Model<ProjectMedia> {
         type: DataType.STRING(128),
         allowNull: false
     })
-    uuid: string;
+    image_url: string;
 
     @ForeignKey(() => User)
     @Column({
@@ -41,11 +41,6 @@ export default class ProjectMedia extends Model<ProjectMedia> {
     })
     media_type: ProjectMediaStatus;
 
-    //associations
-
     @BelongsTo(() => User)
     user: User;
-
-    @BelongsTo(() => Project)
-    project: Project;
 }

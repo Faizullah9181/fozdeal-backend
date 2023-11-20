@@ -4,12 +4,14 @@ import {
     Model,
     DataType,
     ForeignKey,
-    BelongsTo
+    BelongsTo,
+    HasMany
 } from 'sequelize-typescript';
 import { ProjectStatus } from '../enums/ProjectStatus';
 import { ProjectLevel } from '../enums/ProjectLevel';
 import { CategoryStatus } from '../enums/Category';
 import User from './user.model';
+import ProjectMedia from './media.model';
 
 @Table
 export default class Project extends Model<Project> {
@@ -73,8 +75,9 @@ export default class Project extends Model<Project> {
     })
     isActive: number;
 
-    //association
-
     @BelongsTo(() => User)
     user: User;
+
+    @HasMany(() => ProjectMedia)
+    project_media: ProjectMedia[];
 }

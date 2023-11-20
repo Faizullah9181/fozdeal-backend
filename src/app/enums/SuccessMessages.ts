@@ -11,5 +11,6 @@ export enum SuccessMessages {
     UPDATE_USER_ACTIVATION_STATUS = 'User activation status updated successfully',
     UPDATE_SUPER_ADMIN_PROFILE = 'Super admin profile updated successfully',
     UPDATE_ADMIN_PROFILE = 'Admin profile updated successfully',
-    UPDATE_USER_PROFILE = 'User profile updated successfully'
+    UPDATE_USER_PROFILE = 'User profile updated successfully',
+    PROJECT_CREATED = 'Project created successfully'
 }

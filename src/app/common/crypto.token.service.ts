@@ -8,7 +8,7 @@ export default class CryptoTokenService {
 
         return {
             ...user.toJSON(),
-            [role + '-token']: cryptoToken
+            ['user-token']: cryptoToken
         };
     }
 }

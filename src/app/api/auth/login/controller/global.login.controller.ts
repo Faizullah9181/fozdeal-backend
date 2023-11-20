@@ -42,7 +42,7 @@ export default class LoginController extends MasterController {
         return new this.ResponseBuilder(
             StatusCodes.SUCCESS,
             response,
-            SuccessMessages.SUPER_ADMIN_LOGIN_SUCCESS
+            SuccessMessages.USER_LOGIN_SUCCESS
         );
     }
 }
