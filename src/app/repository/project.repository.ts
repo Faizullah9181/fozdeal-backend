@@ -31,6 +31,36 @@ class ProjectRepository extends CommonRepository {
             ]
         });
     }
+
+    async getAll(filter: any, limit: number, offset: number) {
+        const result = await Project.findAndCountAll({
+            where: {
+                ...filter
+            },
+            limit: limit,
+            offset: offset,
+            attributes: [
+                'id',
+                'uuid',
+                'project_name',
+                'project_description',
+                'project_gist',
+                'project_level',
+                'project_category',
+                'project_status',
+                'isActive'
+            ],
+            include: [
+                {
+                    model: ProjectMedia,
+                    as: 'project_media'
+                }
+            ],
+            order: [['id', 'DESC']],
+            distinct: true
+        });
+        return result;
+    }
 }
 
 export default new ProjectRepository();
