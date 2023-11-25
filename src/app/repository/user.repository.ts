@@ -16,13 +16,16 @@ class UserRepository extends CommonRepository {
         });
     }
 
-    async getAllUsers(filters: {}, limit: number, offset: number) {
-        return User.findAll({
+    async getAllUsers(filters: any, limit: number, offset: number) {
+        console.log('filters', filters);
+        return User.findAndCountAll({
             where: {
                 ...filters
             },
             limit,
-            offset
+            offset,
+            order: [['createdAt', 'DESC']],
+            distinct: true
         });
     }
 

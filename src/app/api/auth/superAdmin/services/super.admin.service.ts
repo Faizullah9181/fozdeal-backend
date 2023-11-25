@@ -16,10 +16,13 @@ class SuperAdminService {
     }
 
     async getAllUsers(data: any, limit: number, offset: number) {
+        const role_filter = data?.role;
+        const gender_filter = data?.gender;
+        const status_filter = data?.status;
+
+        console.log('data', role_filter, gender_filter, status_filter);
+
         const filters = {};
-        const role_filter = data?.filter?.role;
-        const gender_filter = data?.filter.role;
-        const status_filter = data?.filter.status;
 
         if (role_filter) {
             filters['role'] = role_filter;
@@ -30,14 +33,12 @@ class SuperAdminService {
         }
 
         if (status_filter) {
-            filters['status'] = status_filter;
+            filters['isActive'] = status_filter === 'active' ? 1 : 0;
         }
 
-        const result = await userRepository.getAllUsers(
-            filters,
-            data.limit,
-            data.offset
-        );
+        console.log('filters', filters);
+
+        const result = await userRepository.getAllUsers(filters, limit, offset);
 
         if (!result) throw new Error('No Users Found');
 

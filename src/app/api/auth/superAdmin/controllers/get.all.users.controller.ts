@@ -43,7 +43,7 @@ export default class GetAllUsers extends MasterController {
     }
 
     async controller() {
-        const { filter, limit, offset } = this.request.body;
+        const { filter, limit, offset } = this.data;
         const response = await superAdminService.getAllUsers(
             filter,
             limit,
