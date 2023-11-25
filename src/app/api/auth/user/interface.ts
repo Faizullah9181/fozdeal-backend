@@ -4,7 +4,7 @@ export interface IUserRegister {
     email: string;
     password: string;
     role: string;
-    phone_number: string;
+    phone: string;
     country_code: string;
     about: string;
 }

@@ -16,11 +16,13 @@ class UserRepository extends CommonRepository {
         });
     }
 
-    async getAllUsers() {
+    async getAllUsers(filters: {}, limit: number, offset: number) {
         return User.findAll({
             where: {
-                role: ['admin', 'entrepreneur', 'investor']
-            }
+                ...filters
+            },
+            limit,
+            offset
         });
     }
 

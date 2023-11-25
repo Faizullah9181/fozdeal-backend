@@ -66,7 +66,7 @@ export default class UserRegisterController extends MasterController {
             email,
             password,
             role: user_type,
-            phone_number,
+            phone: phone_number,
             country_code,
             about
         });

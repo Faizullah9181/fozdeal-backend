@@ -15,8 +15,29 @@ class SuperAdminService {
         return result;
     }
 
-    async getAllUsers() {
-        const result = await userRepository.getAllUsers();
+    async getAllUsers(data: any, limit: number, offset: number) {
+        const filters = {};
+        const role_filter = data?.filter?.role;
+        const gender_filter = data?.filter.role;
+        const status_filter = data?.filter.status;
+
+        if (role_filter) {
+            filters['role'] = role_filter;
+        }
+
+        if (gender_filter) {
+            filters['gender'] = gender_filter;
+        }
+
+        if (status_filter) {
+            filters['status'] = status_filter;
+        }
+
+        const result = await userRepository.getAllUsers(
+            filters,
+            data.limit,
+            data.offset
+        );
 
         if (!result) throw new Error('No Users Found');
 

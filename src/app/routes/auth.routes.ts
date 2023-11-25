@@ -11,7 +11,7 @@ module.exports = function (app) {
 
     UserLoginController.post(app, '/api/auth/v1/user/login', []);
 
-    GetAllUsers.get(app, '/api/auth/v1/user/allUsers', [Auth.superAdminToken]);
+    GetAllUsers.post(app, '/api/auth/v1/user/allUsers', [Auth.superAdminToken]);
 
     CreateAdminController.post(
         app,
