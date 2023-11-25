@@ -8,7 +8,7 @@ class ProjectRepository extends CommonRepository {
     }
 
     async getProjectById(id: number) {
-        return Project.findOne({
+        const project = await Project.findOne({
             where: {
                 id: id
             },
@@ -18,6 +18,7 @@ class ProjectRepository extends CommonRepository {
                 'project_name',
                 'project_description',
                 'project_gist',
+                'createdBy',
                 'project_level',
                 'project_category',
                 'project_status',
@@ -30,6 +31,8 @@ class ProjectRepository extends CommonRepository {
                 }
             ]
         });
+
+        return project;
     }
 
     async getAll(filter: any, limit: number, offset: number) {
@@ -58,6 +61,15 @@ class ProjectRepository extends CommonRepository {
             ],
             order: [['id', 'DESC']],
             distinct: true
+        });
+        return result;
+    }
+
+    async updateProject(data: any, filter: any) {
+        const result = await Project.update(data, {
+            where: {
+                ...filter
+            }
         });
         return result;
     }

@@ -3,6 +3,8 @@ import CreateProjectController from '../api/projects/controller/create.project.c
 import GetAllProjectsController from '../api/projects/controller/get.all.project.controller';
 import GetProjectsForHomePageController from '../api/projects/controller/get.project.homepage.controller';
 import GetAllProjectsForUserController from '../api/projects/controller/get.all.project.users.controller';
+import UpdateProjectController from '../api/projects/controller/update.project.controller';
+import GetProjectByIdController from '../api/projects/controller/get.project.by.id.controller';
 module.exports = function (app) {
     CreateProjectController.post(app, '/api/v1/project/create', [
         Auth.userToken
@@ -20,5 +22,13 @@ module.exports = function (app) {
 
     GetAllProjectsForUserController.post(app, '/api/v1/user/project/getAll', [
         Auth.userToken
+    ]);
+
+    UpdateProjectController.post(app, '/api/v1/project/update', [
+        Auth.userToken
+    ]);
+
+    GetProjectByIdController.post(app, '/api/v1/project/getById', [
+        Auth.verifyToken
     ]);
 };

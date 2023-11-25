@@ -123,6 +123,26 @@ class ProjectService {
         );
         return result;
     }
+
+    async getProjectById(id: number) {
+        const result = await projectRepository.getProjectById(id);
+        return result;
+    }
+
+    async updateProject(data: any) {
+        const result = await projectRepository.updateProject(
+            {
+                project_name: data.project_name,
+                project_description: data.project_description,
+                project_gist: data.project_gist,
+                project_level: data.project_level,
+                project_category: data.project_category
+            },
+            { id: data.project_id }
+        );
+        if (!result) throw new ValidationError('Failed to update project');
+        return 'Project updated successfully';
+    }
 }
 
 export default new ProjectService();
