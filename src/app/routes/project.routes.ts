@@ -24,7 +24,7 @@ module.exports = function (app) {
         Auth.userToken
     ]);
 
-    UpdateProjectController.post(app, '/api/v1/project/update', [
+    UpdateProjectController.put(app, '/api/v1/project/update', [
         Auth.userToken
     ]);
 
