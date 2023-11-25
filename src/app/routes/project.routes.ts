@@ -5,6 +5,7 @@ import GetProjectsForHomePageController from '../api/projects/controller/get.pro
 import GetAllProjectsForUserController from '../api/projects/controller/get.all.project.users.controller';
 import UpdateProjectController from '../api/projects/controller/update.project.controller';
 import GetProjectByIdController from '../api/projects/controller/get.project.by.id.controller';
+import VerifyProjectController from '../api/projects/controller/project.verify.controller';
 module.exports = function (app) {
     CreateProjectController.post(app, '/api/v1/project/create', [
         Auth.userToken
@@ -30,5 +31,9 @@ module.exports = function (app) {
 
     GetProjectByIdController.post(app, '/api/v1/project/getById', [
         Auth.verifyToken
+    ]);
+
+    VerifyProjectController.post(app, '/api/v1/project/verify', [
+        Auth.adminOrSuperAdminToken
     ]);
 };

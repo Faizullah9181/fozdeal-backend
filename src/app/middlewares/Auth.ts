@@ -76,6 +76,14 @@ export default class Auth {
         ]);
     }
 
+    static async adminOrSuperAdminToken(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) {
+        await Auth.verifyUserRole(req, res, next, ['admin', 'super-admin']);
+    }
+
     static async verifyResetPasswordToken(
         req: Request,
         res: Response,

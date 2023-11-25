@@ -136,12 +136,23 @@ class ProjectService {
                 project_description: data.project_description,
                 project_gist: data.project_gist,
                 project_level: data.project_level,
-                project_category: data.project_category
+                project_category: data.project_category,
+                project_status: 'pending'
             },
             { id: data.project_id }
         );
         if (!result) throw new ValidationError('Failed to update project');
         return 'Project updated successfully';
+    }
+    async verifyProject(data: any) {
+        const result = await projectRepository.updateProject(
+            {
+                project_status: data.project_status
+            },
+            { id: data.project_id }
+        );
+        if (!result) throw new ValidationError('Failed to update project');
+        return 1;
     }
 }
 

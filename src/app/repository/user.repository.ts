@@ -17,7 +17,6 @@ class UserRepository extends CommonRepository {
     }
 
     async getAllUsers(filters: any, limit: number, offset: number) {
-        console.log('filters', filters);
         return User.findAndCountAll({
             where: {
                 ...filters

@@ -20,8 +20,6 @@ class SuperAdminService {
         const gender_filter = data?.gender;
         const status_filter = data?.status;
 
-        console.log('data', role_filter, gender_filter, status_filter);
-
         const filters = {};
 
         if (role_filter) {
