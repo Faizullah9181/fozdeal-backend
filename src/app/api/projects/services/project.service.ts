@@ -96,6 +96,33 @@ class ProjectService {
         );
         return result;
     }
+
+    async getAllProjectsForUsers(data: any) {
+        const level_filter = data?.filter?.project_level;
+        const category_filter = data?.filter?.project_category;
+        const status_filter = data?.filter?.project_status;
+
+        const filters = {};
+        if (level_filter) {
+            filters['project_level'] = level_filter;
+        }
+        if (category_filter) {
+            filters['project_category'] = category_filter;
+        }
+
+        if (status_filter) {
+            filters['project_status'] = status_filter;
+        }
+
+        filters['createdBy'] = data.user_id;
+
+        const result = await projectRepository.getAll(
+            filters,
+            data.limit,
+            data.offset
+        );
+        return result;
+    }
 }
 
 export default new ProjectService();

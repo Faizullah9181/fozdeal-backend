@@ -11,4 +11,15 @@ export default class CryptoTokenService {
             ['user-token']: cryptoToken
         };
     }
+
+    static makeResetPasswordToken(user: any, role: string) {
+        const cryptoToken = CryptoJS.AES.encrypt(
+            JSON.stringify(user.toJSON()),
+            process.env.CRYPTO_KEY
+        ).toString();
+
+        return {
+            'reset-token': cryptoToken
+        };
+    }
 }
