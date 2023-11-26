@@ -22,31 +22,84 @@ import { ProjectLevel } from '../../../enums/ProjectLevel';
 
 class categoyService {
     async getCategories() {
-        const categoryresponse = {
-            [CategoryStatus.SpaceAndAerospace]: SpaceAndAerospaceStatus,
-            [CategoryStatus.Technology]: TechnologyStatus,
-            [CategoryStatus.Healthcare]: HealthcareStatus,
-            [CategoryStatus.FinanceAndFintech]: FinanceAndFintechStatus,
-            [CategoryStatus.Ecommerce]: EcommerceStatus,
-            [CategoryStatus.EnergyAndCleanTech]: EnergyAndCleanTechStatus,
-            [CategoryStatus.EducationTech]: EducationTechStatus,
-            [CategoryStatus.ConsumerGoods]: ConsumerGoodsStatus,
-            [CategoryStatus.RealEstate]: RealEstateStatus,
-            [CategoryStatus.Manufacturing]: ManufacturingStatus,
-            [CategoryStatus.EntertainmentAndMedia]: EntertainmentAndMediaStatus,
-            [CategoryStatus.TravelAndHospitality]: TravelAndHospitalityStatus,
-            [CategoryStatus.SocialImpactAndNonprofit]:
-                SocialImpactAndNonprofitStatus,
-            [CategoryStatus.Telecommunications]: TelecommunicationsStatus,
-            [CategoryStatus.AgricultureAndFoodTech]:
-                AgricultureAndFoodTechStatus
+        const categoryResponse = {
+            SpaceAndAerospace: SpaceAndAerospaceStatus,
+            Technology: TechnologyStatus,
+            Healthcare: HealthcareStatus,
+            FinanceAndFintech: FinanceAndFintechStatus,
+            Ecommerce: EcommerceStatus,
+            EnergyAndCleanTech: EnergyAndCleanTechStatus,
+            EducationTech: EducationTechStatus,
+            ConsumerGoods: ConsumerGoodsStatus,
+            RealEstate: RealEstateStatus,
+            Manufacturing: ManufacturingStatus,
+            EntertainmentAndMedia: EntertainmentAndMediaStatus,
+            TravelAndHospitality: TravelAndHospitalityStatus,
+            SocialImpactAndNonprofit: SocialImpactAndNonprofitStatus,
+            Telecommunications: TelecommunicationsStatus,
+            AgricultureAndFoodTech: AgricultureAndFoodTechStatus
         };
 
+        const projectCategories = Object.entries(categoryResponse).map(
+            ([key, value]) => ({
+                name: key,
+                value: CategoryStatus[key],
+
+                project_sub_categories: Object.entries(value).map(
+                    ([subKey, subValue]) => ({
+                        name: subKey,
+                        value: subValue
+                    })
+                )
+            })
+        );
+
+        const geoResponse = {
+            INTERNATIONAL: GeoStatus.INTERNATIONAL,
+            LOCAL: GeoStatus.LOCAL,
+            REGIONAL: GeoStatus.REGIONAL
+        };
+
+        const geoCategories = Object.entries(geoResponse).map(
+            ([key, value]) => ({
+                name: key,
+                value
+            })
+        );
+
+        const sizeResponse = {
+            LARGE: ProjectSizeStatus.LARGE,
+            MEDIUM: ProjectSizeStatus.MEDIUM,
+            SMALL: ProjectSizeStatus.SMALL
+        };
+
+        const sizeCategories = Object.entries(sizeResponse).map(
+            ([key, value]) => ({
+                name: key,
+                value
+            })
+        );
+
+        const levelResponse = {
+            EARLY: ProjectLevel.EARLY,
+            GROWTH: ProjectLevel.GROWTH,
+            LATEORPRIVATE: ProjectLevel.LATEORPRIVATE,
+            PRESEED: ProjectLevel.PRESEED,
+            SEED: ProjectLevel.SEED
+        };
+
+        const levelCategories = Object.entries(levelResponse).map(
+            ([key, value]) => ({
+                name: key,
+                value
+            })
+        );
+
         const response = {
-            categoryresponse,
-            GeoStatus,
-            ProjectLevel,
-            ProjectSizeStatus
+            categories: projectCategories,
+            project_geo_locations: geoCategories,
+            project_size: sizeCategories,
+            project_level: levelCategories
         };
 
         return response;
