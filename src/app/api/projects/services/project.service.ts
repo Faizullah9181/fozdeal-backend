@@ -45,7 +45,7 @@ class ProjectService {
                 throw new ValidationError('Failed to create project media');
         }
 
-        const order_id = id + '_' + Math.floor(100000 + Math.random() * 900000);
+        const order_id = Math.floor(100000 + Math.random() * 900000);
 
         await transactionRepository.createTransaction({
             user_id: data.user_id,
@@ -227,8 +227,7 @@ class ProjectService {
 
     async createInvestment(data: any) {
         const result = await investmentRepository.createInvestment(data);
-        const order_id =
-            data.project_id + '_' + Math.floor(100000 + Math.random() * 900000);
+        const order_id = Math.floor(100000 + Math.random() * 900000);
         if (!result) throw new ValidationError('Failed to create investment');
         else {
             await transactionRepository.createTransaction({
