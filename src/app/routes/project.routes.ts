@@ -6,7 +6,8 @@ import GetAllProjectsForUserController from '../api/projects/controller/get.all.
 import UpdateProjectController from '../api/projects/controller/update.project.controller';
 import GetProjectByIdController from '../api/projects/controller/get.project.by.id.controller';
 import VerifyProjectController from '../api/projects/controller/project.verify.controller';
-module.exports = function (app) {
+import HookController from '../api/projects/controller/hook.controllers';
+module.exports = function (app: any) {
     CreateProjectController.post(app, '/api/v1/project/create', [
         Auth.userToken
     ]);
@@ -36,4 +37,6 @@ module.exports = function (app) {
     VerifyProjectController.post(app, '/api/v1/project/verify', [
         Auth.adminOrSuperAdminToken
     ]);
+
+    HookController.post(app, '/callback', []);
 };
