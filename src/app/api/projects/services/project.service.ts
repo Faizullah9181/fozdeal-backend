@@ -199,7 +199,8 @@ class ProjectService {
     async verifyProject(data: any) {
         const result = await projectRepository.updateProject(
             {
-                project_status: data.project_status
+                project_status: data.project_status,
+                isActive: data.project_status === 'approved' ? 1 : 0
             },
             { id: data.project_id }
         );
