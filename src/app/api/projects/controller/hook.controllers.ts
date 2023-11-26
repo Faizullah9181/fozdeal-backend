@@ -30,7 +30,7 @@ export default class HookController extends MasterController {
             checksumhash
         } = this.data;
         const url =
-            'https://fozdeal-client.netlify.app?MID=' +
+            'http://localhost:5173/payment?MID=' +
             MID +
             '&ORDERID=' +
             ORDERID +
