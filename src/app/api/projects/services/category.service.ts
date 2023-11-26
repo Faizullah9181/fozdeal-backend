@@ -13,7 +13,8 @@ import {
     SocialImpactAndNonprofitStatus,
     TelecommunicationsStatus,
     AgricultureAndFoodTechStatus,
-    SpaceAndAerospaceStatus
+    SpaceAndAerospaceStatus,
+    CategoryStatus
 } from '../../../enums/Category';
 import { GeoStatus } from '../../../enums/GeoStatus';
 import { ProjectSizeStatus } from '../../../enums/ProjectSizeStatus';
@@ -22,21 +23,23 @@ import { ProjectLevel } from '../../../enums/ProjectLevel';
 class categoyService {
     async getCategories() {
         const categoryresponse = {
-            Technology: TechnologyStatus,
-            Healthcare: HealthcareStatus,
-            FinanceAndFintech: FinanceAndFintechStatus,
-            Ecommerce: EcommerceStatus,
-            EnergyAndCleanTech: EnergyAndCleanTechStatus,
-            EducationTech: EducationTechStatus,
-            ConsumerGoods: ConsumerGoodsStatus,
-            RealEstate: RealEstateStatus,
-            Manufacturing: ManufacturingStatus,
-            EntertainmentAndMedia: EntertainmentAndMediaStatus,
-            TravelAndHospitality: TravelAndHospitalityStatus,
-            SocialImpactAndNonprofit: SocialImpactAndNonprofitStatus,
-            Telecommunications: TelecommunicationsStatus,
-            AgricultureAndFoodTech: AgricultureAndFoodTechStatus,
-            SpaceAndAerospace: SpaceAndAerospaceStatus
+            [CategoryStatus.SpaceAndAerospace]: SpaceAndAerospaceStatus,
+            [CategoryStatus.Technology]: TechnologyStatus,
+            [CategoryStatus.Healthcare]: HealthcareStatus,
+            [CategoryStatus.FinanceAndFintech]: FinanceAndFintechStatus,
+            [CategoryStatus.Ecommerce]: EcommerceStatus,
+            [CategoryStatus.EnergyAndCleanTech]: EnergyAndCleanTechStatus,
+            [CategoryStatus.EducationTech]: EducationTechStatus,
+            [CategoryStatus.ConsumerGoods]: ConsumerGoodsStatus,
+            [CategoryStatus.RealEstate]: RealEstateStatus,
+            [CategoryStatus.Manufacturing]: ManufacturingStatus,
+            [CategoryStatus.EntertainmentAndMedia]: EntertainmentAndMediaStatus,
+            [CategoryStatus.TravelAndHospitality]: TravelAndHospitalityStatus,
+            [CategoryStatus.SocialImpactAndNonprofit]:
+                SocialImpactAndNonprofitStatus,
+            [CategoryStatus.Telecommunications]: TelecommunicationsStatus,
+            [CategoryStatus.AgricultureAndFoodTech]:
+                AgricultureAndFoodTechStatus
         };
 
         const response = {
