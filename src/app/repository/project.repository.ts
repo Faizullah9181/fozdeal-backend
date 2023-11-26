@@ -12,18 +12,7 @@ class ProjectRepository extends CommonRepository {
             where: {
                 id: id
             },
-            attributes: [
-                'id',
-                'uuid',
-                'project_name',
-                'project_description',
-                'project_gist',
-                'createdBy',
-                'project_level',
-                'project_category',
-                'project_status',
-                'isActive'
-            ],
+
             include: [
                 {
                     model: ProjectMedia,
@@ -42,17 +31,6 @@ class ProjectRepository extends CommonRepository {
             },
             limit: limit,
             offset: offset,
-            attributes: [
-                'id',
-                'uuid',
-                'project_name',
-                'project_description',
-                'project_gist',
-                'project_level',
-                'project_category',
-                'project_status',
-                'isActive'
-            ],
             include: [
                 {
                     model: ProjectMedia,
