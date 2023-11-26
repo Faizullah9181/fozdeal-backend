@@ -1,4 +1,5 @@
 const { MasterController, RequestBuilder } = require('@orca/base-packages');
+import transactionsService from '../../transactions/services/transactions.service';
 
 export default class HookController extends MasterController {
     static doc() {
@@ -15,6 +16,7 @@ export default class HookController extends MasterController {
 
     async controller() {
         console.log('WEBHOOK', JSON.stringify(this.data));
+        await transactionsService.updateTransaction(this.data);
 
         const {
             MID,
