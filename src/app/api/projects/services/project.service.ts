@@ -1,7 +1,9 @@
 import ValidationError from '../../../../custom/validationErrors';
 import projectRepository from '../../../repository/project.repository';
 import projectMediaRepository from '../../../repository/media.repository';
+import transactionRepository from '../../../repository/transaction.repository';
 import { v4 as uuidv4 } from 'uuid';
+import investmentRepository from '../../../repository/investment.repository';
 
 class ProjectService {
     async createProject(data: any) {
@@ -43,9 +45,22 @@ class ProjectService {
                 throw new ValidationError('Failed to create project media');
         }
 
-        const project = await projectRepository.getProjectById(id);
+        const order_id = id + '_' + Math.floor(100000 + Math.random() * 900000);
 
-        return project;
+        await transactionRepository.createTransaction({
+            user_id: data.user_id,
+            order_id: order_id,
+            project_id: id,
+            status: 'pending'
+        });
+
+        const response = {
+            order_id: order_id
+        };
+
+        console.log(order_id);
+
+        return response;
     }
 
     async getAllProjects(data: any) {
@@ -206,6 +221,75 @@ class ProjectService {
         );
         if (!result) throw new ValidationError('Failed to update project');
         return 1;
+    }
+
+    async createInvestment(data: any) {
+        const result = await investmentRepository.createInvestment(data);
+        const order_id =
+            data.project_id + '_' + Math.floor(100000 + Math.random() * 900000);
+        if (!result) throw new ValidationError('Failed to create investment');
+        else {
+            await transactionRepository.createTransaction({
+                user_id: data.user_id,
+                order_id: order_id,
+                project_id: data.project_id,
+                status: 'pending'
+            });
+        }
+        return { order_id: order_id };
+    }
+
+    async getAllProjectsForInvestors(data: any) {
+        const level_filter = data?.filter?.project_level;
+        const category_filter = data?.filter?.project_category;
+        const status_filter = data?.filter?.project_status;
+        const sub_category_filter = data?.filter?.project_sub_category;
+        const geo_location_filter = data?.filter?.project_geo_location;
+        const size_filter = data?.filter?.project_size;
+
+        const filters = {};
+        if (level_filter) {
+            filters['project_level'] = level_filter;
+        }
+        if (category_filter) {
+            filters['project_category'] = category_filter;
+        }
+
+        if (status_filter) {
+            filters['project_status'] = status_filter;
+        }
+
+        if (sub_category_filter) {
+            filters['project_sub_category'] = sub_category_filter;
+        }
+
+        if (geo_location_filter) {
+            filters['project_geo_location'] = geo_location_filter;
+        }
+
+        if (size_filter) {
+            filters['project_size'] = size_filter;
+        }
+
+        const investorProjects = await investmentRepository.getAll({
+            user_id: data.user_id
+        });
+
+        const ids = investorProjects.map((project: any) => {
+            return project.project_id;
+        });
+
+        filters['id'] = ids;
+
+        console.log(filters);
+
+        const result = await projectRepository.getAll(
+            filters,
+            data.limit,
+            data.offset
+        );
+
+        return result;
     }
 }
 

@@ -15,6 +15,7 @@ import { ProjectSizeStatus } from '../enums/ProjectSizeStatus';
 import { GeoStatus } from '../enums/GeoStatus';
 import User from './user.model';
 import ProjectMedia from './media.model';
+import Transaction from './transactions';
 
 @Table
 export default class Project extends Model<Project> {
@@ -104,4 +105,7 @@ export default class Project extends Model<Project> {
 
     @HasMany(() => ProjectMedia)
     project_media: ProjectMedia[];
+
+    @HasMany(() => Transaction)
+    transactions: Transaction[];
 }

@@ -7,6 +7,8 @@ import UpdateProjectController from '../api/projects/controller/update.project.c
 import GetProjectByIdController from '../api/projects/controller/get.project.by.id.controller';
 import VerifyProjectController from '../api/projects/controller/project.verify.controller';
 import HookController from '../api/projects/controller/hook.controllers';
+import CreateInvestMentController from '../api/projects/controller/create.investment.project.controller';
+import GetAllProjectsForInvestorController from '../api/projects/controller/get.all.project.investor.controller';
 module.exports = function (app: any) {
     CreateProjectController.post(app, '/api/v1/project/create', [
         Auth.userToken
@@ -26,6 +28,12 @@ module.exports = function (app: any) {
         Auth.userToken
     ]);
 
+    GetAllProjectsForInvestorController.post(
+        app,
+        '/api/v1/investor/project/getAll',
+        [Auth.userToken]
+    );
+
     UpdateProjectController.put(app, '/api/v1/project/update', [
         Auth.userToken
     ]);
@@ -36,6 +44,10 @@ module.exports = function (app: any) {
 
     VerifyProjectController.post(app, '/api/v1/project/verify', [
         Auth.adminOrSuperAdminToken
+    ]);
+
+    CreateInvestMentController.post(app, '/api/v1/project/invest', [
+        Auth.userToken
     ]);
 
     HookController.post(app, '/callback', []);

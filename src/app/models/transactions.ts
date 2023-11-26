@@ -6,19 +6,11 @@ import {
     ForeignKey,
     BelongsTo
 } from 'sequelize-typescript';
-import Invest from './invest.table';
 import User from './user.model';
+import Project from './projects.model';
 
 @Table
 export default class Transaction extends Model<Transaction> {
-    @ForeignKey(() => Invest)
-    @Column({
-        type: DataType.INTEGER,
-        unique: false,
-        allowNull: false
-    })
-    invest_id: number;
-
     @ForeignKey(() => User)
     @Column({
         type: DataType.INTEGER,
@@ -27,10 +19,29 @@ export default class Transaction extends Model<Transaction> {
     })
     user_id: number;
 
+    @Column({
+        type: DataType.STRING,
+        unique: false,
+        allowNull: false
+    })
+    order_id: string;
+
+    @ForeignKey(() => Project)
+    @Column({
+        type: DataType.INTEGER,
+        unique: false,
+        allowNull: false
+    })
+    project_id: number;
+
+    @Column({
+        type: DataType.STRING,
+        unique: false,
+        allowNull: false
+    })
+    status: string;
+
     //associations
     @BelongsTo(() => User)
     user: User;
-
-    @BelongsTo(() => Invest)
-    invest: Invest;
 }
