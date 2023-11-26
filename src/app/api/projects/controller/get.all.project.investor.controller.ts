@@ -18,7 +18,7 @@ const {
 export default class GetAllProjectsForInvestorController extends MasterController {
     static doc() {
         return {
-            tags: ['investor'],
+            tags: ['Investor'],
             description: 'Get All Available Projects For Investor',
             summary: 'get all available projects for admins  for approval'
         };
