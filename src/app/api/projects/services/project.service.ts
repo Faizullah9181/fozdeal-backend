@@ -98,7 +98,8 @@ class ProjectService {
         const result = await projectRepository.getAll(
             filters,
             data.limit,
-            data.offset
+            data.offset,
+            0
         );
         return result;
     }
@@ -137,7 +138,7 @@ class ProjectService {
 
         filters['isActive'] = 1;
 
-        const result = await projectRepository.getAll(
+        const result = await projectRepository.getAllInvestment(
             filters,
             data.limit,
             data.offset
@@ -182,7 +183,8 @@ class ProjectService {
         const result = await projectRepository.getAll(
             filters,
             data.limit,
-            data.offset
+            data.offset,
+            data.user_id
         );
         return result;
     }
@@ -286,7 +288,8 @@ class ProjectService {
         const result = await projectRepository.getAll(
             filters,
             data.limit,
-            data.offset
+            data.offset,
+            data.user_id
         );
 
         return result;
