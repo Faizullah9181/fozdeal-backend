@@ -4,6 +4,9 @@ import ProjectService from '../services/project.service';
 import { CategoryStatus } from '../../../enums/Category';
 import { ProjectLevel } from '../../../enums/ProjectLevel';
 import { ProjectStatus } from '../../../enums/ProjectStatus';
+import { SubCategoryStatus } from '../../../enums/Category';
+import { GeoStatus } from '../../../enums/GeoStatus';
+import { ProjectSizeStatus } from '../../../enums/ProjectSizeStatus';
 
 const {
     MasterController,
@@ -32,26 +35,23 @@ export default class GetAllProjectsController extends MasterController {
                 offset: Joi.number().required(),
                 filter: Joi.object().keys({
                     project_level: Joi.string().valid(
-                        ProjectLevel.EARLY,
-                        ProjectLevel.EXIT,
-                        ProjectLevel.EXPANSION,
-                        ProjectLevel.GROWTH,
-                        ProjectLevel.PRESEED,
-                        ProjectLevel.SEED
+                        ...Object.values(ProjectLevel)
                     ),
                     project_category: Joi.string().valid(
-                        CategoryStatus.AGRICULTURE,
-                        CategoryStatus.EDUCATION,
-                        CategoryStatus.FINANCE,
-                        CategoryStatus.HEALTH,
-                        CategoryStatus.TECHNOLOGY,
-                        CategoryStatus.ENERGY
+                        ...Object.values(CategoryStatus)
                     ),
+
                     project_status: Joi.string().valid(
-                        ProjectStatus.APPROVED,
-                        ProjectStatus.PENDING,
-                        ProjectStatus.REJECTED,
-                        ProjectStatus.MODIFICATION_REQUIRED
+                        ...Object.values(ProjectStatus)
+                    ),
+                    project_sub_category: Joi.string().valid(
+                        ...Object.values(SubCategoryStatus)
+                    ),
+                    project_geo_location: Joi.string().valid(
+                        ...Object.values(GeoStatus)
+                    ),
+                    project_size: Joi.string().valid(
+                        ...Object.values(ProjectSizeStatus)
                     )
                 })
             })

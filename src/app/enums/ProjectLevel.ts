@@ -3,6 +3,5 @@ export enum ProjectLevel {
     SEED = 'seed',
     EARLY = 'early',
     GROWTH = 'growth',
-    EXPANSION = 'expansion',
-    EXIT = 'exit'
+    LATEORPRIVATE = 'lateorprivate'
 }

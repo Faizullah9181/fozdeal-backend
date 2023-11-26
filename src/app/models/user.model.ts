@@ -55,6 +55,13 @@ export default class User extends Model<User> {
     password: string;
 
     @Column({
+        type: DataType.INTEGER,
+        allowNull: true,
+        defaultValue: 0
+    })
+    is_subscribe: 0;
+
+    @Column({
         type: DataType.ENUM,
         values: ['male', 'female'],
         allowNull: true

@@ -4,6 +4,9 @@ import ProjectService from '../services/project.service';
 import { CategoryStatus } from '../../../enums/Category';
 import { ProjectLevel } from '../../../enums/ProjectLevel';
 import { ProjectMediaStatus } from '../../../enums/ProjectMediaStatus';
+import { SubCategoryStatus } from '../../../enums/Category';
+import { GeoStatus } from '../../../enums/GeoStatus';
+import { ProjectSizeStatus } from '../../../enums/ProjectSizeStatus';
 
 const {
     MasterController,
@@ -31,36 +34,26 @@ export default class CreateProjectController extends MasterController {
                 project_name: Joi.string().required(),
                 project_description: Joi.string().required(),
                 project_gist: Joi.string().required(),
-                project_level: Joi.string()
-                    .valid(
-                        ProjectLevel.EARLY,
-                        ProjectLevel.EXIT,
-                        ProjectLevel.EXPANSION,
-                        ProjectLevel.GROWTH,
-                        ProjectLevel.PRESEED,
-                        ProjectLevel.SEED
-                    )
-                    .required(),
+                project_level: Joi.valid(
+                    ...Object.values(ProjectLevel)
+                ).required(),
                 project_category: Joi.string()
-                    .valid(
-                        CategoryStatus.AGRICULTURE,
-                        CategoryStatus.EDUCATION,
-                        CategoryStatus.FINANCE,
-                        CategoryStatus.HEALTH,
-                        CategoryStatus.TECHNOLOGY,
-                        CategoryStatus.ENERGY
-                    )
+                    .valid(...Object.values(CategoryStatus))
+                    .required(),
+                project_sub_category: Joi.string()
+                    .valid(...Object.values(SubCategoryStatus))
+                    .required(),
+                project_geo_location: Joi.string()
+                    .valid(...Object.values(GeoStatus))
+                    .required(),
+                project_size: Joi.string()
+                    .valid(...Object.values(ProjectSizeStatus))
                     .required(),
                 project_media: Joi.array().items(
                     Joi.object().keys({
                         url: Joi.string().required(),
                         media_type: Joi.string()
-                            .valid(
-                                ProjectMediaStatus.BANNER,
-                                ProjectMediaStatus.PRODUCTIMAGE,
-                                ProjectMediaStatus.PROJECT_ATTACHMENT,
-                                ProjectMediaStatus.ISFEATURED
-                            )
+                            .valid(...Object.values(ProjectMediaStatus))
                             .required()
                     })
                 )
@@ -77,7 +70,10 @@ export default class CreateProjectController extends MasterController {
             project_gist,
             project_level,
             project_category,
-            project_media
+            project_media,
+            project_sub_category,
+            project_geo_location,
+            project_size
         } = this.data;
         const response = await ProjectService.createProject({
             user_id: user.id,
@@ -86,7 +82,10 @@ export default class CreateProjectController extends MasterController {
             project_gist,
             project_level,
             project_category,
-            project_media
+            project_media,
+            project_sub_category,
+            project_geo_location,
+            project_size
         });
         return new this.ResponseBuilder(
             StatusCodes.SUCCESS,

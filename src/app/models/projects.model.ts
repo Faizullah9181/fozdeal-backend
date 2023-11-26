@@ -10,6 +10,9 @@ import {
 import { ProjectStatus } from '../enums/ProjectStatus';
 import { ProjectLevel } from '../enums/ProjectLevel';
 import { CategoryStatus } from '../enums/Category';
+import { SubCategoryStatus } from '../enums/Category';
+import { ProjectSizeStatus } from '../enums/ProjectSizeStatus';
+import { GeoStatus } from '../enums/GeoStatus';
 import User from './user.model';
 import ProjectMedia from './media.model';
 
@@ -67,6 +70,27 @@ export default class Project extends Model<Project> {
         allowNull: false
     })
     project_category: CategoryStatus;
+
+    @Column({
+        type: DataType.ENUM,
+        values: Object.values(SubCategoryStatus),
+        allowNull: false
+    })
+    project_sub_category: SubCategoryStatus;
+
+    @Column({
+        type: DataType.ENUM,
+        values: Object.values(ProjectSizeStatus),
+        allowNull: false
+    })
+    project_size: ProjectSizeStatus;
+
+    @Column({
+        type: DataType.ENUM,
+        values: Object.values(GeoStatus),
+        allowNull: false
+    })
+    project_geo_location: GeoStatus;
 
     @Column({
         type: DataType.INTEGER,

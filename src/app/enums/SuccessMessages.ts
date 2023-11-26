@@ -17,5 +17,6 @@ export enum SuccessMessages {
     PROJECT_STATUS_UPDATED = 'Project status updated successfully',
     PROJECT_FETCHED = 'Project fetched successfully',
     FORGOT_PASSWORD_EMAIL_SENT = 'Forgot password email sent successfully',
-    PASSWORD_RESET_SUCCESS = 'Password reset successfully'
+    PASSWORD_RESET_SUCCESS = 'Password reset successfully',
+    CATEGORY_FETCHED = 'Category fetched successfully'
 }

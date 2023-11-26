@@ -3,6 +3,9 @@ import { SuccessMessages } from '../../../enums/SuccessMessages';
 import ProjectService from '../services/project.service';
 import { CategoryStatus } from '../../../enums/Category';
 import { ProjectLevel } from '../../../enums/ProjectLevel';
+import { SubCategoryStatus } from '../../../enums/Category';
+import { GeoStatus } from '../../../enums/GeoStatus';
+import { ProjectSizeStatus } from '../../../enums/ProjectSizeStatus';
 
 const {
     MasterController,
@@ -31,20 +34,19 @@ export default class GetProjectsForHomePageController extends MasterController {
                 offset: Joi.number().required(),
                 filter: Joi.object().keys({
                     project_level: Joi.string().valid(
-                        ProjectLevel.EARLY,
-                        ProjectLevel.EXIT,
-                        ProjectLevel.EXPANSION,
-                        ProjectLevel.GROWTH,
-                        ProjectLevel.PRESEED,
-                        ProjectLevel.SEED
+                        ...Object.values(ProjectLevel)
                     ),
                     project_category: Joi.string().valid(
-                        CategoryStatus.AGRICULTURE,
-                        CategoryStatus.EDUCATION,
-                        CategoryStatus.FINANCE,
-                        CategoryStatus.HEALTH,
-                        CategoryStatus.TECHNOLOGY,
-                        CategoryStatus.ENERGY
+                        ...Object.values(CategoryStatus)
+                    ),
+                    project_sub_category: Joi.string().valid(
+                        ...Object.values(SubCategoryStatus)
+                    ),
+                    project_geo_location: Joi.string().valid(
+                        ...Object.values(GeoStatus)
+                    ),
+                    project_size: Joi.string().valid(
+                        ...Object.values(ProjectSizeStatus)
                     )
                 })
             })
@@ -54,7 +56,7 @@ export default class GetProjectsForHomePageController extends MasterController {
 
     async controller() {
         const { user, limit, offset, filter } = this.data;
-        const response = await ProjectService.getAllProjects({
+        const response = await ProjectService.getAllProjectsForInvestment({
             user_id: user.id,
             limit,
             offset,

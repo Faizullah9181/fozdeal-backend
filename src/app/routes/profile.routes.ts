@@ -4,6 +4,7 @@ import GetAdminDetails from '../api/auth/admin/controllers/get.admin.profile';
 import UpdateAdminProfileController from '../api/auth/admin/controllers/update.admin.profile.controller';
 import UpdateSuperAdminProfileController from '../api/auth/superAdmin/controllers/update.superAdmin.profile.controller';
 import UpdateUserProfileController from '../api/auth/user/controllers/update.user.profile.controller';
+import GetAllCategories from '../api/projects/controller/get.all.project.category.controller';
 
 import Auth from '../middlewares/Auth';
 module.exports = function (app) {
@@ -32,4 +33,6 @@ module.exports = function (app) {
     UpdateUserProfileController.put(app, '/api/auth/v1/user/update/profile', [
         Auth.userToken
     ]);
+
+    GetAllCategories.get(app, '/api/get/categories', []);
 };

@@ -15,6 +15,9 @@ class ProjectService {
             project_gist: data.project_gist,
             project_level: data.project_level,
             project_category: data.project_category,
+            project_sub_category: data.project_sub_category,
+            project_geo_location: data.project_geo_location,
+            project_size: data.project_size,
             isActive: 0
         });
 
@@ -49,6 +52,9 @@ class ProjectService {
         const level_filter = data?.filter?.project_level;
         const category_filter = data?.filter?.project_category;
         const status_filter = data?.filter?.project_status;
+        const sub_category_filter = data?.filter?.project_sub_category;
+        const geo_location_filter = data?.filter?.project_geo_location;
+        const size_filter = data?.filter?.project_size;
 
         const filters = {};
         if (level_filter) {
@@ -60,6 +66,18 @@ class ProjectService {
 
         if (status_filter) {
             filters['project_status'] = status_filter;
+        }
+
+        if (sub_category_filter) {
+            filters['project_sub_category'] = sub_category_filter;
+        }
+
+        if (geo_location_filter) {
+            filters['project_geo_location'] = geo_location_filter;
+        }
+
+        if (size_filter) {
+            filters['project_size'] = size_filter;
         }
 
         const result = await projectRepository.getAll(
@@ -74,6 +92,9 @@ class ProjectService {
         const level_filter = data?.filter?.project_level;
         const category_filter = data?.filter?.project_category;
         const status_filter = data?.filter?.project_status;
+        const sub_category_filter = data?.filter?.project_sub_category;
+        const geo_location_filter = data?.filter?.project_geo_location;
+        const size_filter = data?.filter?.project_size;
 
         const filters = {};
         if (level_filter) {
@@ -85,6 +106,18 @@ class ProjectService {
 
         if (status_filter) {
             filters['project_status'] = status_filter;
+        }
+
+        if (sub_category_filter) {
+            filters['project_sub_category'] = sub_category_filter;
+        }
+
+        if (geo_location_filter) {
+            filters['project_geo_location'] = geo_location_filter;
+        }
+
+        if (size_filter) {
+            filters['project_size'] = size_filter;
         }
 
         filters['isActive'] = 1;
@@ -101,6 +134,9 @@ class ProjectService {
         const level_filter = data?.filter?.project_level;
         const category_filter = data?.filter?.project_category;
         const status_filter = data?.filter?.project_status;
+        const sub_category_filter = data?.filter?.project_sub_category;
+        const geo_location_filter = data?.filter?.project_geo_location;
+        const size_filter = data?.filter?.project_size;
 
         const filters = {};
         if (level_filter) {
@@ -112,6 +148,18 @@ class ProjectService {
 
         if (status_filter) {
             filters['project_status'] = status_filter;
+        }
+
+        if (sub_category_filter) {
+            filters['project_sub_category'] = sub_category_filter;
+        }
+
+        if (geo_location_filter) {
+            filters['project_geo_location'] = geo_location_filter;
+        }
+
+        if (size_filter) {
+            filters['project_size'] = size_filter;
         }
 
         filters['createdBy'] = data.user_id;
@@ -137,7 +185,11 @@ class ProjectService {
                 project_gist: data.project_gist,
                 project_level: data.project_level,
                 project_category: data.project_category,
-                project_status: 'pending'
+                project_status: 'pending',
+                project_sub_category: data.project_sub_category,
+                project_geo_location: data.project_geo_location,
+                project_size: data.project_size,
+                isActive: 0
             },
             { id: data.project_id }
         );
