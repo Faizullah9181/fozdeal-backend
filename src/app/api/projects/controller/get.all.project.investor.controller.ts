@@ -46,15 +46,15 @@ export default class GetAllProjectsForInvestorController extends MasterControlle
                     project_status: Joi.string().valid(
                         ...Object.values(ProjectStatus)
                     ),
-                    project_sub_category: Joi.string()
-                        .valid(...Object.values(SubCategoryStatus))
-                        .required(),
-                    project_geo_location: Joi.string()
-                        .valid(...Object.values(GeoStatus))
-                        .required(),
-                    project_size: Joi.string()
-                        .valid(...Object.values(ProjectSizeStatus))
-                        .required()
+                    project_sub_category: Joi.string().valid(
+                        ...Object.values(SubCategoryStatus)
+                    ),
+                    project_geo_location: Joi.string().valid(
+                        ...Object.values(GeoStatus)
+                    ),
+                    project_size: Joi.string().valid(
+                        ...Object.values(ProjectSizeStatus)
+                    )
                 })
             })
         );
