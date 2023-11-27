@@ -306,14 +306,16 @@ class ProjectService {
 
         const project = await projectRepository.getProjectById(data.project_id);
 
-        if (result.status !== 'paid' && !result && !project)
-            throw new ValidationError('you are not allowed to view details');
-        else {
+        if (!project) throw new ValidationError('Project not found');
+
+        if (result.status == 'paid') {
             const user = await userRepository.findUser({
                 id: project.createdBy
             });
 
             return user;
+        } else {
+            throw new ValidationError('you are not allowed to view details');
         }
     }
 }
