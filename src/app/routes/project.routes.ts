@@ -39,9 +39,7 @@ module.exports = function (app: any) {
         Auth.userToken
     ]);
 
-    GetProjectByIdController.post(app, '/api/v1/project/getById', [
-        Auth.verifyToken
-    ]);
+    GetProjectByIdController.post(app, '/api/v1/project/getById', []);
 
     VerifyProjectController.post(app, '/api/v1/project/verify', [
         Auth.adminOrSuperAdminToken

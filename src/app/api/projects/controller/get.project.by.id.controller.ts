@@ -32,31 +32,15 @@ export default class GetProjectByIdController extends MasterController {
     }
 
     async controller() {
-        const { user, project_id } = this.data;
+        const { project_id } = this.data;
         const response = await ProjectService.getProjectById(project_id);
 
         if (!response) throw new ValidationError('Project not found');
 
-        if (
-            user.role == 'admin' ||
-            user.role == 'super_admin' ||
-            (user.id == response.createdBy && response.isActive == 0)
-        ) {
-            return new this.ResponseBuilder(
-                StatusCodes.SUCCESS,
-                response,
-                SuccessMessages.PROJECT_FETCHED
-            );
-        }
-
-        if (response.isActive == 1) {
-            return new this.ResponseBuilder(
-                StatusCodes.SUCCESS,
-                response,
-                SuccessMessages.PROJECT_FETCHED
-            );
-        } else {
-            throw new ValidationError('Project not found');
-        }
+        return new this.ResponseBuilder(
+            StatusCodes.SUCCESS,
+            response,
+            SuccessMessages.PROJECT_FETCHED
+        );
     }
 }
