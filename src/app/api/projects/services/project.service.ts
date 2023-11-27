@@ -318,6 +318,14 @@ class ProjectService {
             throw new ValidationError('you are not allowed to view details');
         }
     }
+
+    async getProjectData() {
+        const result = await projectRepository.getProjectData();
+
+        if (!result) throw new ValidationError('Project not found');
+
+        return result;
+    }
 }
 
 export default new ProjectService();

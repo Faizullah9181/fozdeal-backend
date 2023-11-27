@@ -80,6 +80,56 @@ class ProjectRepository extends CommonRepository {
         });
         return result;
     }
+
+    async getProjectData() {
+        const totalProjectsPromise = Project.count();
+
+        const approvedProjectsPromise = Project.count({
+            where: {
+                project_status: 'approved'
+            }
+        });
+
+        const pendingProjectsPromise = Project.count({
+            where: {
+                project_status: 'pending'
+            }
+        });
+
+        const rejectedProjectsPromise = Project.count({
+            where: {
+                project_status: 'rejected'
+            }
+        });
+
+        const modificationRequestedProjectsPromise = Project.count({
+            where: {
+                project_status: 'modification_required'
+            }
+        });
+
+        const [
+            totalProjects,
+            approvedProjects,
+            pendingProjects,
+            rejectedProjects,
+            modificationRequestedProjects
+        ] = await Promise.all([
+            totalProjectsPromise,
+            approvedProjectsPromise,
+            pendingProjectsPromise,
+            rejectedProjectsPromise,
+            modificationRequestedProjectsPromise
+        ]);
+
+        return {
+            total_projects: totalProjects,
+            approved_projects: approvedProjects,
+            pending_projects: pendingProjects,
+            rejected_projects: rejectedProjects,
+            modification_requested_projects: modificationRequestedProjects
+        };
+    }
 }
 
 export default new ProjectRepository();
