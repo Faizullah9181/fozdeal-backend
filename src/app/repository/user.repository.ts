@@ -17,7 +17,7 @@ class UserRepository extends CommonRepository {
     }
 
     async getAllUsers(filters: any, limit: number, offset: number) {
-        return User.findAndCountAll({
+        const user = await User.findAndCountAll({
             where: {
                 ...filters
             },
@@ -26,6 +26,38 @@ class UserRepository extends CommonRepository {
             order: [['createdAt', 'DESC']],
             distinct: true
         });
+
+        const investorCountPromise = User.count({
+            where: {
+                role: 'investor'
+            }
+        });
+
+        const entrepreneurCountPromise = User.count({
+            where: {
+                role: 'entrepreneur'
+            }
+        });
+
+        const adminCountPromise = User.count({
+            where: {
+                role: 'admin'
+            }
+        });
+
+        const [investorCount, entrepreneurCount, adminCount] =
+            await Promise.all([
+                investorCountPromise,
+                entrepreneurCountPromise,
+                adminCountPromise
+            ]);
+
+        return {
+            user,
+            invetsor_count: investorCount,
+            entrepreneur_count: entrepreneurCount,
+            admin_count: adminCount
+        };
     }
 
     async UpdateActivation(data: any, actiVationStatus: number) {

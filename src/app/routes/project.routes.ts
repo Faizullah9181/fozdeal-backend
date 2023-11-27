@@ -51,7 +51,7 @@ module.exports = function (app: any) {
 
     GetDetailsForEnterPrenuerController.post(
         app,
-        '/api/v1/project/getDetailsOfEnterprenuer',
+        '/api/v1/project/getDetailsOfEntrepreneur',
         [Auth.userToken]
     );
 

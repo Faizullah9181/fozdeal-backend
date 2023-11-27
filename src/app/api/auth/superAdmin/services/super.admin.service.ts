@@ -36,6 +36,8 @@ class SuperAdminService {
 
         console.log('filters', filters);
 
+        filters['role'] = ['admin', 'entrepreneur', 'investor'];
+
         const result = await userRepository.getAllUsers(filters, limit, offset);
 
         if (!result) throw new Error('No Users Found');
@@ -66,7 +68,8 @@ class SuperAdminService {
                 last_name: data.last_name,
                 phone: data.phone,
                 about: data.about,
-                country_code: data.country_code
+                country_code: data.country_code,
+                gender: data.gender
             },
             data.user_id
         );

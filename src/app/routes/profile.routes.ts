@@ -18,19 +18,17 @@ module.exports = function (app) {
         Auth.adminToken
     ]);
 
-    UpdateAdminProfileController.put(
-        app,
-        '/api/auth/v1/user/admin/update/profile',
-        [Auth.adminToken]
-    );
+    UpdateAdminProfileController.put(app, '/api/auth/v1/user/admin/profile', [
+        Auth.adminToken
+    ]);
 
     UpdateSuperAdminProfileController.put(
         app,
-        '/api/auth/v1/user/update/superAdmin/profile',
+        '/api/auth/v1/user/superAdmin/profile',
         [Auth.superAdminToken]
     );
 
-    UpdateUserProfileController.put(app, '/api/auth/v1/user/update/profile', [
+    UpdateUserProfileController.put(app, '/api/auth/v1/user/profile', [
         Auth.userToken
     ]);
 
