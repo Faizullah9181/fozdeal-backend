@@ -105,13 +105,12 @@ class GridEmailService {
 
         const html = await fs.readFile(htmlPath, 'utf8');
 
-        const transaction_number = emailData.transaction_number;
         const status = emailData.status;
 
         const name = emailData.name;
 
         const populatedHtml = html
-            .replace('${transactionNumber}', transaction_number)
+
             .replace('${status}', status)
             .replace('${name}', name);
 
