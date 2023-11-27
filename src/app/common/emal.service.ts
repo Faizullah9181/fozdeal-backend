@@ -75,12 +75,14 @@ class GridEmailService {
                 <!-- Registration Email Template -->
                 <div class="container">
                     <h1>Registration Email</h1>
-                    <p>Your registration is successful for fozdeal for ${emailData.email}</p>
+                    <p>Hello ${emailData.first_name},</p>
+                    <p>Congratulations! Your registration for fozdeal with the email ${emailData.email} was successful.</p>
                 </div>
 
                 <div class="container" dir="rtl" lang="ar">
                     <h1>رسالة تأكيد التسجيل</h1>
-                    <p>تم التسجيل بنجاح لـ fozdeal لـ ${emailData.email}</p>
+                    <p>مرحبًا ${emailData.first_name},</p>
+                    <p>تهانينا! تم التسجيل الخاص بك في fozdeal بنجاح باستخدام البريد الإلكتروني ${emailData.email}.</p>
                 </div>
             `
         };
@@ -98,14 +100,16 @@ class GridEmailService {
                 <!-- Payment Email Template -->
                 <div class="container">
                     <h1>Payment Email</h1>
-                    <p>Your payment is ${emailData.status} for transaction number ${emailData.transaction_number}</p>
+                    <p>Hello, </p>
+                    <p>We want to inform you that your payment for transaction number ${emailData.transaction_number} has been ${emailData.status}.</p>
                 </div>
 
                 <div class="container" dir="rtl" lang="ar">
                     <h1>رسالة الدفع</h1>
-                    <p>تم ${emailData.status} دفعك للعملية رقم ${emailData.transaction_number}</p>
+                    <p>مرحبًا ,</p>
+                    <p>نود أن نخبرك أن دفعتك للعملية رقم ${emailData.transaction_number} تم ${emailData.status}.</p>
                 </div>
-            `
+            `,
         };
 
         const response = await this.sendEmail(msg);
