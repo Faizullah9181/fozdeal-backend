@@ -68,6 +68,7 @@ export default class VerifyProjectController extends MasterController {
 
             const emailData = {
                 email: user.email,
+                name: user.first_name,
                 project_name: project.project_name,
                 project_status: project_status
             };

@@ -1,5 +1,7 @@
 import * as sgMail from '@sendgrid/mail';
+import * as fs from 'fs/promises';
 
+const path = require('path');
 class GridEmailService {
     async sendEmail(message: any) {
         sgMail.setApiKey(process.env.SEND_GRID_KEY);
@@ -44,22 +46,29 @@ class GridEmailService {
     }
 
     async sendProjectStatusEmail(emailData) {
+        const htmlPath = path.join(
+            __dirname,
+            '..',
+            'views',
+            'projectstatus.html'
+        );
+
+        const html = await fs.readFile(htmlPath, 'utf8');
+
+        const name = emailData.name;
+        const project_name = emailData.project_name;
+        const project_status = emailData.project_status;
+
+        const populatedHtml = html
+            .replace('${name}', name)
+            .replace('${projectName}', project_name)
+            .replace('${projectStatus}', project_status);
+
         const msg = {
             to: emailData.email,
             from: 'amani@aiqatar.qa',
             subject: 'Project Status Email',
-            html: `
-                <!-- Project Status Email Template -->
-                <div class="container">
-                    <h1>Project Status Email</h1>
-                    <p>Your project ${emailData.project_name} has been ${emailData.project_status}</p>
-                </div>
-
-                <div class="container" dir="rtl" lang="ar">
-                    <h1>رسالة حالة المشروع</h1>
-                    <p>تم تحديث حالة مشروعك ${emailData.project_name} إلى ${emailData.project_status}</p>
-                </div>
-            `
+            html: populatedHtml
         };
 
         const response = await this.sendEmail(msg);
@@ -67,24 +76,24 @@ class GridEmailService {
     }
 
     async sendRegistrationEmail(emailData) {
+        const htmlPath = path.join(
+            __dirname,
+            '..',
+            'views',
+            'registerTemplate.html'
+        );
+
+        const html = await fs.readFile(htmlPath, 'utf8');
+
+        const name = emailData.first_name;
+
+        const populatedHtml = html.replace('${name}', name);
+
         const msg = {
             to: emailData.email,
             from: 'amani@aiqatar.qa',
             subject: 'Registration Email',
-            html: `
-                <!-- Registration Email Template -->
-                <div class="container">
-                    <h1>Registration Email</h1>
-                    <p>Hello ${emailData.first_name},</p>
-                    <p>Congratulations! Your registration for fozdeal with the email ${emailData.email} was successful.</p>
-                </div>
-
-                <div class="container" dir="rtl" lang="ar">
-                    <h1>رسالة تأكيد التسجيل</h1>
-                    <p>مرحبًا ${emailData.first_name},</p>
-                    <p>تهانينا! تم التسجيل الخاص بك في fozdeal بنجاح باستخدام البريد الإلكتروني ${emailData.email}.</p>
-                </div>
-            `
+            html: populatedHtml
         };
 
         const response = await this.sendEmail(msg);
@@ -92,24 +101,22 @@ class GridEmailService {
     }
 
     async sendPaymentEmail(emailData) {
+        const htmlPath = path.join(__dirname, '..', 'views', 'payment.html');
+
+        const html = await fs.readFile(htmlPath, 'utf8');
+
+        const transaction_number = emailData.transaction_number;
+        const status = emailData.status;
+
+        const populatedHtml = html
+            .replace('${transactionNumber}', transaction_number)
+            .replace('${status}', status);
+
         const msg = {
             to: emailData.email,
             from: 'amani@aiqatar.qa',
             subject: 'Payment Email',
-            html: `
-                <!-- Payment Email Template -->
-                <div class="container">
-                    <h1>Payment Email</h1>
-                    <p>Hello, </p>
-                    <p>We want to inform you that your payment for transaction number ${emailData.transaction_number} has been ${emailData.status}.</p>
-                </div>
-
-                <div class="container" dir="rtl" lang="ar">
-                    <h1>رسالة الدفع</h1>
-                    <p>مرحبًا ,</p>
-                    <p>نود أن نخبرك أن دفعتك للعملية رقم ${emailData.transaction_number} تم ${emailData.status}.</p>
-                </div>
-            `,
+            html: populatedHtml
         };
 
         const response = await this.sendEmail(msg);
