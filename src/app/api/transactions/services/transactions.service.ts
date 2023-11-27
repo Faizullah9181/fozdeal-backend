@@ -29,7 +29,8 @@ class TransactionsService {
         await emalService.sendPaymentEmail({
             status,
             transaction_number,
-            email: getUserEmail.email
+            email: getUserEmail.email,
+            name: getUserEmail.first_name
         });
 
         await transactionRepository.updateTransaction(
