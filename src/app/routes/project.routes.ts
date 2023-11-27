@@ -9,6 +9,7 @@ import VerifyProjectController from '../api/projects/controller/project.verify.c
 import HookController from '../api/projects/controller/hook.controllers';
 import CreateInvestMentController from '../api/projects/controller/create.investment.project.controller';
 import GetAllProjectsForInvestorController from '../api/projects/controller/get.all.project.investor.controller';
+import GetDetailsForEnterPrenuerController from '../api/projects/controller/get.enterprenuer.details.controller';
 module.exports = function (app: any) {
     CreateProjectController.post(app, '/api/v1/project/create', [
         Auth.userToken
@@ -49,6 +50,12 @@ module.exports = function (app: any) {
     CreateInvestMentController.post(app, '/api/v1/project/invest', [
         Auth.userToken
     ]);
+
+    GetDetailsForEnterPrenuerController.post(
+        app,
+        '/api/v1/project/getDetailsOfEnterprenuer',
+        [Auth.userToken]
+    );
 
     HookController.post(app, '/callback', []);
 };

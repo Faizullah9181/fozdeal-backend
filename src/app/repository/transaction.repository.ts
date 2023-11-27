@@ -23,6 +23,15 @@ class TransactionRepository extends CommonRepository {
         });
         return result;
     }
+
+    async getOne(filter: any) {
+        const result = await Transaction.findOne({
+            where: {
+                ...filter
+            }
+        });
+        return result;
+    }
 }
 
 export default new TransactionRepository();

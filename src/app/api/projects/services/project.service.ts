@@ -4,6 +4,7 @@ import projectMediaRepository from '../../../repository/media.repository';
 import transactionRepository from '../../../repository/transaction.repository';
 import { v4 as uuidv4 } from 'uuid';
 import investmentRepository from '../../../repository/investment.repository';
+import userRepository from '../../../repository/user.repository';
 
 class ProjectService {
     async createProject(data: any) {
@@ -292,6 +293,28 @@ class ProjectService {
         );
 
         return result;
+    }
+
+    async getDetailForEnterprenuer(data: any) {
+        const result = await transactionRepository.getOne({
+            project_id: data.project_id,
+            user_id: data.user_id
+        });
+
+        if (!result)
+            throw new ValidationError('you are not allowed to view details');
+
+        const project = await projectRepository.getProjectById(data.project_id);
+
+        if (result.status !== 'paid' && !result && !project)
+            throw new ValidationError('you are not allowed to view details');
+        else {
+            const user = await userRepository.findUser({
+                id: project.createdBy
+            });
+
+            return user;
+        }
     }
 }
 
