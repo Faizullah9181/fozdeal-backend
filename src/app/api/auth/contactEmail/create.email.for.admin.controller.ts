@@ -8,7 +8,7 @@ const {
     RequestBuilder
 } = require('@orca/base-packages');
 
-export default class UpdateAdminProfileController extends MasterController {
+export default class ContactEmailSenderController extends MasterController {
     static doc() {
         return {
             tags: ['Utilites'],
