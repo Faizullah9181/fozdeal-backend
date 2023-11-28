@@ -1,5 +1,5 @@
 import transactionRepository from '../../../repository/transaction.repository';
-import emalService from '../../../common/emal.service';
+import emalService from '../../../common/email.service';
 import userRepository from '../../../repository/user.repository';
 
 class TransactionsService {

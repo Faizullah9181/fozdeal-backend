@@ -2,7 +2,7 @@ import { StatusCodes } from '../../../enums/StatusCode';
 import { SuccessMessages } from '../../../enums/SuccessMessages';
 import ProjectService from '../services/project.service';
 import ValidationError from '../../../../custom/validationErrors';
-import GridEmailService from '../../../common/emal.service';
+import GridEmailService from '../../../common/email.service';
 import userRepository from '../../../repository/user.repository';
 
 const {
@@ -69,6 +69,7 @@ export default class VerifyProjectController extends MasterController {
             const emailData = {
                 email: user.email,
                 name: user.first_name,
+                user_id: user.id,
                 project_name: project.project_name,
                 project_status: project_status
             };

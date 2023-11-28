@@ -1,7 +1,7 @@
 import { ErrorMessages } from '../../../enums/ErrorMessages';
 import { StatusCodes } from '../../../enums/StatusCode';
 import { SuccessMessages } from '../../../enums/SuccessMessages';
-import GridEmailService from '../../../common/emal.service';
+import GridEmailService from '../../../common/email.service';
 import authService from '../auth.service';
 
 const {

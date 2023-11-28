@@ -37,7 +37,7 @@ export default class UserRegisterController extends MasterController {
                 user_type: Joi.string()
                     .valid(Roles.ENTERPRENEUR, Roles.INVESTOR)
                     .required(),
-                country_code: Joi.string(),
+                country_code: Joi.string().required(),
                 phone_number: Joi.string(),
                 about: Joi.string()
             })
@@ -54,7 +54,8 @@ export default class UserRegisterController extends MasterController {
             user_type,
             country_code,
             about,
-            phone_number
+            phone_number,
+            gender
         } = this.data;
         let user = await authService.getUserFromEmailAndRole(email);
         if (user) {
@@ -68,7 +69,8 @@ export default class UserRegisterController extends MasterController {
             role: user_type,
             phone: phone_number,
             country_code,
-            about
+            about,
+            gender
         });
         return new this.ResponseBuilder(
             StatusCodes.SUCCESS,

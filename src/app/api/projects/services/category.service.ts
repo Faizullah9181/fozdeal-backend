@@ -16,7 +16,11 @@ import {
     SpaceAndAerospaceStatus,
     CategoryStatus
 } from '../../../enums/Category';
-import { GeoStatus } from '../../../enums/GeoStatus';
+import {
+    InterNational,
+    CountryRegion,
+    Country
+} from '../../../enums/GeoStatus';
 import { ProjectSizeStatus } from '../../../enums/ProjectSizeStatus';
 import { ProjectLevel } from '../../../enums/ProjectLevel';
 
@@ -54,18 +58,46 @@ class categoyService {
             })
         );
 
-        const geoResponse = {
-            INTERNATIONAL: GeoStatus.INTERNATIONAL,
-            LOCAL: GeoStatus.LOCAL,
-            REGIONAL: GeoStatus.REGIONAL
+        type Entry = {
+            name: string;
+            value: string;
+            countries?: { name: string; value: string }[];
+            regions?: { name: string; value: string }[];
         };
 
-        const geoCategories = Object.entries(geoResponse).map(
-            ([key, value]) => ({
+        const geoResponse = {
+            INTERNATIONAL: InterNational,
+            LOCAL: Country,
+            REGIONAL: CountryRegion
+        };
+
+        const geoCategories: Record<string, Entry> = Object.entries(
+            geoResponse
+        ).reduce((acc, [key, value]) => {
+            const entry: Entry = {
                 name: key,
-                value
-            })
-        );
+                value: key.toLowerCase()
+            };
+
+            if (value === Country) {
+                entry.countries = Object.entries(Country).map(
+                    ([countryKey, countryValue]) => ({
+                        name: countryKey,
+                        value: countryValue.toLowerCase()
+                    })
+                );
+            } else if (value === CountryRegion) {
+                entry.regions = Object.entries(CountryRegion).map(
+                    ([regionKey, regionValue]) => ({
+                        name: regionKey,
+                        value: regionValue.toLowerCase()
+                    })
+                );
+            }
+
+            acc[key.toLowerCase()] = entry;
+            return acc;
+        }, {});
 
         const sizeResponse = {
             LARGE: ProjectSizeStatus.LARGE,
