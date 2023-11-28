@@ -12,7 +12,6 @@ import { ProjectLevel } from '../enums/ProjectLevel';
 import { CategoryStatus } from '../enums/Category';
 import { SubCategoryStatus } from '../enums/Category';
 import { ProjectSizeStatus } from '../enums/ProjectSizeStatus';
-import { GeoStatus } from '../enums/GeoStatus';
 import User from './user.model';
 import ProjectMedia from './media.model';
 import Transaction from './transactions';
