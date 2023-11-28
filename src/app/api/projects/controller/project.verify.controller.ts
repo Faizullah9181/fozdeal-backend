@@ -33,14 +33,15 @@ export default class VerifyProjectController extends MasterController {
                     'approved',
                     'rejected',
                     'modification_required'
-                )
+                ),
+                language: Joi.string().valid('en', 'ar').required()
             })
         );
         return payload;
     }
 
     async controller() {
-        const { user, project_id, project_status } = this.data;
+        const { user, project_id, project_status, language } = this.data;
 
         const project = await ProjectService.getProjectById(project_id);
 
@@ -71,7 +72,8 @@ export default class VerifyProjectController extends MasterController {
                 name: user.first_name,
                 user_id: user.id,
                 project_name: project.project_name,
-                project_status: project_status
+                project_status: project_status,
+                language: language
             };
 
             const response = await GridEmailService.sendProjectStatusEmail(

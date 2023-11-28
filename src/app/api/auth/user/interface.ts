@@ -8,6 +8,7 @@ export interface IUserRegister {
     country_code: string;
     about: string;
     gender: string;
+    language: string;
 }
 
 export interface IUserLogin {

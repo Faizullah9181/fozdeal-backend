@@ -7,7 +7,11 @@ class TransactionsService {
         let { ORDERID, RESPCODE, transaction_number } = data;
 
         const firstChar = ORDERID.charAt(0);
-        ORDERID = ORDERID.slice(1);
+
+        const secondChar = ORDERID.charAt(1);
+        ORDERID = ORDERID.slice(2);
+
+        const language = secondChar === 'A' ? 'ar' : 'en';
 
         let status = 'pending';
 
@@ -20,13 +24,13 @@ class TransactionsService {
         } else if (RESPCODE === '810' && firstChar === 'O') {
             status = 'failed';
         } else if (RESPCODE === '1' && firstChar === 'S') {
-            status = 'subscription_paid';
+            status = 'subscription paid';
         } else if (RESPCODE === '400' && firstChar === 'S') {
-            status = 'subscription_pending';
+            status = 'subscription pending';
         } else if (RESPCODE === '402' && firstChar === 'S') {
-            status = 'subscription_pending';
+            status = 'subscription pending';
         } else if (RESPCODE === '810' && firstChar === 'S') {
-            status = 'subscription_failed';
+            status = 'subscription failed';
         }
 
         const getUser = await transactionRepository.getOne({
@@ -41,7 +45,8 @@ class TransactionsService {
             status,
             transaction_number,
             email: getUserEmail.email,
-            name: getUserEmail.first_name
+            name: getUserEmail.first_name,
+            language: language
         });
 
         await transactionRepository.updateTransaction(
@@ -51,7 +56,7 @@ class TransactionsService {
             { order_id: ORDERID }
         );
 
-        if (status === 'subscription_paid') {
+        if (status === 'subscription paid') {
             await userRepository.updateUser(
                 {
                     is_subscribe: 1,
