@@ -11,6 +11,7 @@ import CreateInvestMentController from '../api/projects/controller/create.invest
 import GetAllProjectsForInvestorController from '../api/projects/controller/get.all.project.investor.controller';
 import GetDetailsForEnterPrenuerController from '../api/projects/controller/get.enterprenuer.details.controller';
 import GetProjectDataController from '../api/projects/controller/get.projects.data.controller';
+import CreateBuyInvestMentController from '../api/transactions/controller/create.subscription.controller';
 module.exports = function (app: any) {
     CreateProjectController.post(app, '/api/v1/project/create', [
         Auth.userToken
@@ -61,4 +62,6 @@ module.exports = function (app: any) {
     GetProjectDataController.get(app, '/api/v1/project/getAnalytics', [
         Auth.adminOrSuperAdminToken
     ]);
+
+    CreateBuyInvestMentController.get(app, '/api/v1/buy', [Auth.userToken]);
 };

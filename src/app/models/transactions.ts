@@ -30,7 +30,7 @@ export default class Transaction extends Model<Transaction> {
     @Column({
         type: DataType.INTEGER,
         unique: false,
-        allowNull: false
+        allowNull: true
     })
     project_id: number;
 
