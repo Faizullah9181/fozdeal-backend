@@ -87,11 +87,10 @@ export default class Project extends Model<Project> {
     project_size: ProjectSizeStatus;
 
     @Column({
-        type: DataType.ENUM,
-        values: Object.values(GeoStatus),
+        type: DataType.STRING(128),
         allowNull: false
     })
-    project_geo_location: GeoStatus;
+    project_geo_location: string;
 
     @Column({
         type: DataType.INTEGER,
