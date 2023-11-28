@@ -55,7 +55,7 @@ class TransactionsService {
             await userRepository.updateUser(
                 {
                     is_subscribe: 1,
-                    subscription_started_at: new Date()
+                    subscription_started_at: new Date().toString()
                 },
                 user
             );
