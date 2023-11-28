@@ -182,7 +182,7 @@ class GridEmailService {
             .replace('${note}', note);
 
         const msg = {
-            to: 'info@fozdeal.com',
+            to: 'anzalabidi@gmailcom',
             from: emailData.sender_email,
             subject: 'Contact Email',
             html: populatedHtml
