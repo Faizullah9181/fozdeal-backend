@@ -75,6 +75,10 @@ export default class CreateProjectController extends MasterController {
             project_geo_location,
             project_size
         } = this.data;
+
+        if (user.role !== 'entrepreneur')
+            throw new Error('Only entrepreneur can create project');
+
         const response = await ProjectService.createProject({
             user_id: user.id,
             project_name,

@@ -298,7 +298,8 @@ class ProjectService {
     async getDetailForEnterprenuer(data: any) {
         const result = await transactionRepository.getOne({
             project_id: data.project_id,
-            user_id: data.user_id
+            user_id: data.user_id,
+            status: 'paid'
         });
 
         if (!result)
@@ -308,7 +309,7 @@ class ProjectService {
 
         if (!project) throw new ValidationError('Project not found');
 
-        if (result.status == 'paid') {
+        if (result) {
             const user = await userRepository.findUser({
                 id: project.createdBy
             });

@@ -1,3 +1,4 @@
+import ValidationError from '../../../../custom/validationErrors';
 import { StatusCodes } from '../../../enums/StatusCode';
 import { SuccessMessages } from '../../../enums/SuccessMessages';
 import ProjectService from '../services/project.service';
@@ -33,6 +34,12 @@ export default class GetDetailsForEnterPrenuerController extends MasterControlle
 
     async controller() {
         const { user, project_id } = this.data;
+
+        if (user.role !== 'investor') {
+            throw new ValidationError(
+                'Only investor can get details of enterprenuer'
+            );
+        }
         const response = await ProjectService.getDetailForEnterprenuer({
             project_id,
             user_id: user.id
