@@ -46,12 +46,23 @@ class GridEmailService {
     }
 
     async sendProjectStatusEmail(emailData) {
-        const htmlPath = path.join(
-            __dirname,
-            '..',
-            'views',
-            'projectstatus.html'
-        );
+        let htmlPath;
+
+        if (emailData.language === 'en') {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'projectstatus.html'
+            );
+        } else {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'projectstatusArabic.html'
+            );
+        }
 
         const html = await fs.readFile(htmlPath, 'utf8');
 
@@ -76,12 +87,23 @@ class GridEmailService {
     }
 
     async sendRegistrationEmail(emailData) {
-        const htmlPath = path.join(
-            __dirname,
-            '..',
-            'views',
-            'registerTemplate.html'
-        );
+        let htmlPath;
+
+        if (emailData.language === 'en') {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'registerTemplate.html'
+            );
+        } else {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'registerTemplateArabic.html'
+            );
+        }
 
         const html = await fs.readFile(htmlPath, 'utf8');
 
@@ -101,7 +123,18 @@ class GridEmailService {
     }
 
     async sendPaymentEmail(emailData) {
-        const htmlPath = path.join(__dirname, '..', 'views', 'payment.html');
+        let htmlPath;
+        if (emailData.language === 'en') {
+            htmlPath = path.join(__dirname, '..', 'views', 'payment.html');
+        }
+        if (emailData.language === 'ar') {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'paymentArabic.html'
+            );
+        }
 
         const html = await fs.readFile(htmlPath, 'utf8');
 
@@ -124,6 +157,40 @@ class GridEmailService {
         const response = await this.sendEmail(msg);
         return response;
     }
-}
 
+    async sendContactEmailToAdmin(emailData) {
+        let htmlPath;
+        if (emailData.language === 'en') {
+            htmlPath = path.join(__dirname, '..', 'views', 'contact.html');
+        }
+        if (emailData.language === 'ar') {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'contactArabic.html'
+            );
+        }
+
+        const html = await fs.readFile(htmlPath, 'utf8');
+
+        const sender_email = emailData.sender_email;
+        const note = emailData.note;
+
+        const populatedHtml = html
+            .replace('${sender_email}', sender_email)
+            .replace('${note}', note);
+
+        const msg = {
+            to: 'info@fozdeal.com',
+            from: emailData.sender_email,
+            subject: 'Contact Email',
+            html: populatedHtml
+        };
+
+        const response = await this.sendEmail(msg);
+
+        return response;
+    }
+}
 export default new GridEmailService();
