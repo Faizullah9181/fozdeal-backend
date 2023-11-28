@@ -54,7 +54,8 @@ class TransactionsService {
         if (status === 'subscription_paid') {
             await userRepository.updateUser(
                 {
-                    is_subscribe: 1
+                    is_subscribe: 1,
+                    subscription_started_at: new Date()
                 },
                 user
             );

@@ -283,8 +283,6 @@ class ProjectService {
 
         filters['id'] = ids;
 
-        console.log(filters);
-
         const result = await projectRepository.getAll(
             filters,
             data.limit,
@@ -296,27 +294,48 @@ class ProjectService {
     }
 
     async getDetailForEnterprenuer(data: any) {
-        const result = await transactionRepository.getOne({
-            project_id: data.project_id,
-            user_id: data.user_id,
-            status: 'paid'
-        });
+        if (data.is_subscribe === 1) {
+            const premium_project = await projectRepository.getProjectById(
+                data.project_id
+            );
 
-        if (!result)
-            throw new ValidationError('you are not allowed to view details');
+            if (!premium_project)
+                throw new ValidationError('Project not found');
 
-        const project = await projectRepository.getProjectById(data.project_id);
-
-        if (!project) throw new ValidationError('Project not found');
-
-        if (result) {
             const user = await userRepository.findUser({
-                id: project.createdBy
+                id: premium_project.createdBy
             });
 
             return user;
         } else {
-            throw new ValidationError('you are not allowed to view details');
+            const result = await transactionRepository.getOne({
+                project_id: data.project_id,
+                user_id: data.user_id,
+                status: 'paid'
+            });
+
+            if (!result)
+                throw new ValidationError(
+                    'you are not allowed to view details'
+                );
+
+            const project = await projectRepository.getProjectById(
+                data.project_id
+            );
+
+            if (!project) throw new ValidationError('Project not found');
+
+            if (result) {
+                const user = await userRepository.findUser({
+                    id: project.createdBy
+                });
+
+                return user;
+            } else {
+                throw new ValidationError(
+                    'you are not allowed to view details'
+                );
+            }
         }
     }
 

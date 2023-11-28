@@ -2,7 +2,6 @@ import ValidationError from '../../../../custom/validationErrors';
 import { StatusCodes } from '../../../enums/StatusCode';
 import { SuccessMessages } from '../../../enums/SuccessMessages';
 import ProjectService from '../services/project.service';
-
 const {
     MasterController,
     Joi,
@@ -40,9 +39,11 @@ export default class GetDetailsForEnterPrenuerController extends MasterControlle
                 'Only investor can get details of enterprenuer'
             );
         }
+
         const response = await ProjectService.getDetailForEnterprenuer({
             project_id,
-            user_id: user.id
+            user_id: user.id,
+            is_subscribe: user.is_subscribe
         });
         return new this.ResponseBuilder(
             StatusCodes.SUCCESS,
