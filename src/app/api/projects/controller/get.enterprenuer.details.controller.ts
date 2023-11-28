@@ -2,6 +2,7 @@ import ValidationError from '../../../../custom/validationErrors';
 import { StatusCodes } from '../../../enums/StatusCode';
 import { SuccessMessages } from '../../../enums/SuccessMessages';
 import ProjectService from '../services/project.service';
+import userRepository from '../../../repository/user.repository';
 const {
     MasterController,
     Joi,
@@ -40,10 +41,14 @@ export default class GetDetailsForEnterPrenuerController extends MasterControlle
             );
         }
 
+        const isSubscribe = await userRepository.findUser({
+            id: user.id
+        });
+
         const response = await ProjectService.getDetailForEnterprenuer({
             project_id,
             user_id: user.id,
-            is_subscribe: user.is_subscribe
+            is_subscribe: isSubscribe.is_subscribe
         });
         return new this.ResponseBuilder(
             StatusCodes.SUCCESS,

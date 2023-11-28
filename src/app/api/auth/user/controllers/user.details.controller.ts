@@ -22,7 +22,8 @@ export default class GetUserDetails extends MasterController {
 
         if (user.role === 'investor') {
             const result = await userRepository.findUser({ id: user.id });
-            if (user.is_subscribe === 1) {
+            const subscriptionFlag: number = result.is_subscribe;
+            if (subscriptionFlag === 1) {
                 const date1 = new Date(result.subscription_started_at);
                 const date2 = new Date();
                 const diffTime = Math.abs(date2.getTime() - date1.getTime());
