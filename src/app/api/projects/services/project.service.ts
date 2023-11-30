@@ -273,6 +273,8 @@ class ProjectService {
             filters['project_size'] = size_filter;
         }
 
+        filters['isActive'] = 1;
+
         const user = await userRepository.findUser({
             id: data.user_id
         });

@@ -29,8 +29,7 @@ class ProjectRepository extends CommonRepository {
     async getAll(filter: any, limit: number, offset: number, user_id: number) {
         const result = await Project.findAndCountAll({
             where: {
-                ...filter,
-                isActive: 1
+                ...filter
             },
             limit: limit,
             offset: offset,
