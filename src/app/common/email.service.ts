@@ -106,21 +106,7 @@ class GridEmailService {
     async sendRegistrationEmail(emailData) {
         let htmlPath;
 
-        if (emailData.language === 'en') {
-            htmlPath = path.join(
-                __dirname,
-                '..',
-                'views',
-                'registerTemplate.html'
-            );
-        } else {
-            htmlPath = path.join(
-                __dirname,
-                '..',
-                'views',
-                'registerTemplate.html'
-            );
-        }
+        htmlPath = path.join(__dirname, '..', 'views', 'registerTemplate.html');
 
         const html = await fs.readFile(htmlPath, 'utf8');
 
@@ -141,12 +127,8 @@ class GridEmailService {
 
     async sendPaymentEmail(emailData) {
         let htmlPath;
-        if (emailData.language === 'en') {
-            htmlPath = path.join(__dirname, '..', 'views', 'payment.html');
-        }
-        if (emailData.language === 'ar') {
-            htmlPath = path.join(__dirname, '..', 'views', 'payment.html');
-        }
+
+        htmlPath = path.join(__dirname, '..', 'views', 'payment.html');
 
         const html = await fs.readFile(htmlPath, 'utf8');
 
@@ -172,12 +154,8 @@ class GridEmailService {
 
     async sendContactEmailToAdmin(emailData) {
         let htmlPath;
-        if (emailData.language === 'en') {
-            htmlPath = path.join(__dirname, '..', 'views', 'contact.html');
-        }
-        if (emailData.language === 'ar') {
-            htmlPath = path.join(__dirname, '..', 'views', 'contact.html');
-        }
+
+        htmlPath = path.join(__dirname, '..', 'views', 'contact.html');
 
         const html = await fs.readFile(htmlPath, 'utf8');
 
@@ -211,7 +189,7 @@ class GridEmailService {
         const msg = {
             to: emailData.email,
             from: 'amani@aiqatar.qa',
-            subject: 'Contact Email',
+            subject: 'Product Upload Email',
             html: populatedHtml
         };
 
