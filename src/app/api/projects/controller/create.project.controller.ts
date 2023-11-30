@@ -75,7 +75,8 @@ export default class CreateProjectController extends MasterController {
             project_media,
             project_sub_category,
             project_geo_location,
-            project_size
+            project_size,
+            language
         } = this.data;
 
         if (user.role !== 'entrepreneur')
@@ -91,12 +92,14 @@ export default class CreateProjectController extends MasterController {
             project_media,
             project_sub_category,
             project_geo_location,
-            project_size
+            project_size,
+            language
         });
         if (response) {
             const emailData = {
                 name: user.first_name,
-                email: user.email
+                email: user.email,
+                language: language
             };
 
             await emailService.sendProductUploadEmail(emailData);
