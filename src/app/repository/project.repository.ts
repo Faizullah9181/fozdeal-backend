@@ -11,8 +11,7 @@ class ProjectRepository extends CommonRepository {
     async getProjectById(id: number) {
         const project = await Project.findOne({
             where: {
-                id: id,
-                isActive: 1
+                id: id
             },
 
             include: [
