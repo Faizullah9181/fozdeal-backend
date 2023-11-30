@@ -24,6 +24,8 @@ class SuperAdminService {
 
         if (role_filter) {
             filters['role'] = role_filter;
+        } else {
+            filters['role'] = ['admin', 'entrepreneur', 'investor'];
         }
 
         if (gender_filter) {
@@ -35,8 +37,6 @@ class SuperAdminService {
         }
 
         console.log('filters', filters);
-
-        filters['role'] = ['admin', 'entrepreneur', 'investor'];
 
         const result = await userRepository.getAllUsers(filters, limit, offset);
 

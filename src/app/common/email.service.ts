@@ -163,11 +163,14 @@ class GridEmailService {
 
         const note = emailData.note;
 
-        const populatedHtml = html.replace('${note}', note);
+        const populatedHtml = html.replace(
+            '${note}',
+            note + '\nThis email is From: ' + emailData.sender_email
+        );
 
         const msg = {
             to: 'amani@aiqatar.qa',
-            from: emailData.sender_email,
+            from: 'amani@aiqatar.qa',
             subject: 'Contact Email',
             html: populatedHtml
         };
