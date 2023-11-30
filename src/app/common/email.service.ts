@@ -181,12 +181,9 @@ class GridEmailService {
 
         const html = await fs.readFile(htmlPath, 'utf8');
 
-        const sender_email = emailData.sender_email;
         const note = emailData.note;
 
-        const populatedHtml = html
-            .replace('${sender_email}', sender_email)
-            .replace('${note}', note);
+        const populatedHtml = html.replace('${note}', note);
 
         const msg = {
             to: 'info@fozdeal.com',
