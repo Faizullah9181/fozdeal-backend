@@ -204,16 +204,11 @@ class GridEmailService {
                 __dirname,
                 '..',
                 'views',
-                'productupload.html'
+                'projectupload.html'
             );
         }
         if (emailData.language === 'ar') {
-            htmlPath = path.join(
-                __dirname,
-                '..',
-                'views',
-                'productupload.html'
-            );
+            htmlPath = path.join(__dirname, '..', 'views', 'projectupload');
         }
 
         const html = await fs.readFile(htmlPath, 'utf8');
@@ -223,8 +218,8 @@ class GridEmailService {
         const populatedHtml = html.replace('${name}', name);
 
         const msg = {
-            to: 'info@fozdeal.com',
-            from: emailData.email,
+            to: emailData.email,
+            from: 'amani@aiqatar.qa',
             subject: 'Contact Email',
             html: populatedHtml
         };
