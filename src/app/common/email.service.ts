@@ -199,17 +199,8 @@ class GridEmailService {
 
     async sendProductUploadEmail(emailData) {
         let htmlPath;
-        if (emailData.language === 'en') {
-            htmlPath = path.join(
-                __dirname,
-                '..',
-                'views',
-                'projectupload.html'
-            );
-        }
-        if (emailData.language === 'ar') {
-            htmlPath = path.join(__dirname, '..', 'views', 'projectupload');
-        }
+
+        htmlPath = path.join(__dirname, '..', 'views', 'projectupload.html');
 
         const html = await fs.readFile(htmlPath, 'utf8');
 
