@@ -196,5 +196,42 @@ class GridEmailService {
 
         return response;
     }
+
+    async sendProductUploadEmail(emailData) {
+        let htmlPath;
+        if (emailData.language === 'en') {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'productupload.html'
+            );
+        }
+        if (emailData.language === 'ar') {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'productupload.html'
+            );
+        }
+
+        const html = await fs.readFile(htmlPath, 'utf8');
+
+        const name = emailData.name;
+
+        const populatedHtml = html.replace('${name}', name);
+
+        const msg = {
+            to: 'info@fozdeal.com',
+            from: emailData.email,
+            subject: 'Contact Email',
+            html: populatedHtml
+        };
+
+        const response = await this.sendEmail(msg);
+
+        return response;
+    }
 }
 export default new GridEmailService();
