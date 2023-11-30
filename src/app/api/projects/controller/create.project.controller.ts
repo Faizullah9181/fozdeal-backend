@@ -57,7 +57,8 @@ export default class CreateProjectController extends MasterController {
                             .valid(...Object.values(ProjectMediaStatus))
                             .required()
                     })
-                )
+                ),
+                language: Joi.string().valid('en', 'ar').required()
             })
         );
         return payload;

@@ -53,7 +53,10 @@ class GridEmailService {
         let name;
         let note;
 
-        if (emailData.project_status === 'approved') {
+        if (
+            emailData.project_status === 'approved' &&
+            emailData.language === 'en'
+        ) {
             htmlPath = path.join(
                 __dirname,
                 '..',
@@ -64,7 +67,24 @@ class GridEmailService {
 
             name = emailData.name;
         }
-        if (emailData.project_status === 'rejected') {
+        if (
+            emailData.project_status === 'approved' &&
+            emailData.language === 'ar'
+        ) {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'projectaccptedstatusArabic.html'
+            );
+            html = await fs.readFile(htmlPath, 'utf8');
+
+            name = emailData.name;
+        }
+        if (
+            emailData.project_status === 'rejected' &&
+            emailData.language === 'en'
+        ) {
             htmlPath = path.join(
                 __dirname,
                 '..',
@@ -76,12 +96,46 @@ class GridEmailService {
             name = emailData.name;
             note = emailData.note;
         }
-        if (emailData.project_status === 'modification_required') {
+        if (
+            emailData.project_status === 'rejected' &&
+            emailData.language === 'ar'
+        ) {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'projectrejectionstatusArabic.html'
+            );
+            html = await fs.readFile(htmlPath, 'utf8');
+
+            name = emailData.name;
+            note = emailData.note;
+        }
+
+        if (
+            emailData.project_status === 'modification_required' &&
+            emailData.language === 'en'
+        ) {
             htmlPath = path.join(
                 __dirname,
                 '..',
                 'views',
                 'projectmodificationstatus.html'
+            );
+            html = await fs.readFile(htmlPath, 'utf8');
+
+            name = emailData.name;
+            note = emailData.note;
+        }
+        if (
+            emailData.project_status === 'modification_required' &&
+            emailData.language === 'ar'
+        ) {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'projectmodificationstatusArabic.html'
             );
             html = await fs.readFile(htmlPath, 'utf8');
 
@@ -97,7 +151,11 @@ class GridEmailService {
         const msg = {
             to: emailData.email,
             from: 'amani@aiqatar.qa',
-            subject: 'Project Status Email',
+
+            subject:
+                emailData.language === 'en'
+                    ? 'Project Status Email'
+                    : 'رسالة حالة المشروع',
             html: populatedHtml
         };
 
@@ -107,8 +165,21 @@ class GridEmailService {
 
     async sendRegistrationEmail(emailData) {
         let htmlPath;
-
-        htmlPath = path.join(__dirname, '..', 'views', 'registerTemplate.html');
+        if (emailData.language === 'en') {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'registerTemplate.html'
+            );
+        } else {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'registerTemplateArabic.html'
+            );
+        }
 
         const html = await fs.readFile(htmlPath, 'utf8');
 
@@ -119,7 +190,10 @@ class GridEmailService {
         const msg = {
             to: emailData.email,
             from: 'amani@aiqatar.qa',
-            subject: 'Subject: Registration Successful',
+            subject:
+                emailData.language === 'en'
+                    ? 'Registration Email'
+                    : 'رسالة تسجيل',
             html: populatedHtml
         };
 
@@ -130,7 +204,16 @@ class GridEmailService {
     async sendPaymentEmail(emailData) {
         let htmlPath;
 
-        htmlPath = path.join(__dirname, '..', 'views', 'payment.html');
+        if (emailData.language === 'en') {
+            htmlPath = path.join(__dirname, '..', 'views', 'payment.html');
+        } else {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'paymentArabic.view.html'
+            );
+        }
 
         const html = await fs.readFile(htmlPath, 'utf8');
 
@@ -146,7 +229,8 @@ class GridEmailService {
         const msg = {
             to: emailData.email,
             from: 'amani@aiqatar.qa',
-            subject: 'Payment Email',
+            subject:
+                emailData.language === 'en' ? 'Payment Email' : 'رسالة الدفع',
             html: populatedHtml
         };
 
@@ -182,7 +266,21 @@ class GridEmailService {
     async sendProductUploadEmail(emailData) {
         let htmlPath;
 
-        htmlPath = path.join(__dirname, '..', 'views', 'projectupload.html');
+        if (emailData.language === 'en') {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'projectupload.html'
+            );
+        } else {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'projectuploadArabic.html'
+            );
+        }
 
         const html = await fs.readFile(htmlPath, 'utf8');
 
@@ -193,7 +291,10 @@ class GridEmailService {
         const msg = {
             to: emailData.email,
             from: 'amani@aiqatar.qa',
-            subject: 'Product Upload Email',
+            subject:
+                emailData.language === 'en'
+                    ? 'Project Upload Email'
+                    : 'رسالة تحميل المشروع',
             html: populatedHtml
         };
 
