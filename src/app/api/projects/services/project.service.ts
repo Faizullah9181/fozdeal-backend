@@ -273,6 +273,23 @@ class ProjectService {
             filters['project_size'] = size_filter;
         }
 
+        const user = await userRepository.findUser({
+            id: data.user_id
+        });
+
+        const isPremium: Number = user.is_subscribe;
+
+        if (isPremium === 1) {
+            const result = await projectRepository.getAll(
+                filters,
+                data.limit,
+                data.offset,
+                data.user_id
+            );
+
+            return result;
+        }
+
         const investorProjects = await investmentRepository.getAll({
             user_id: data.user_id
         });
