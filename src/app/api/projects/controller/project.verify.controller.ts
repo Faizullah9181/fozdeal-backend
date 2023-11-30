@@ -34,7 +34,8 @@ export default class VerifyProjectController extends MasterController {
                     'rejected',
                     'modification_required'
                 ),
-                language: Joi.string().valid('en', 'ar').required()
+                language: Joi.string().valid('en', 'ar').required(),
+                note: Joi.string().optional()
             })
         );
         return payload;
@@ -42,6 +43,7 @@ export default class VerifyProjectController extends MasterController {
 
     async controller() {
         const { user, project_id, project_status, language } = this.data;
+        let { note } = this.data;
 
         const project = await ProjectService.getProjectById(project_id);
 
@@ -72,6 +74,7 @@ export default class VerifyProjectController extends MasterController {
                 name: user.first_name,
                 user_id: user.id,
                 project_name: project.project_name,
+                note: note,
                 project_status: project_status,
                 language: language
             };

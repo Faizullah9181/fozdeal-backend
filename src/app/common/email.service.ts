@@ -47,33 +47,50 @@ class GridEmailService {
 
     async sendProjectStatusEmail(emailData) {
         let htmlPath;
+        let html;
+        let name;
+        let note;
 
-        if (emailData.language === 'en') {
+        if (emailData.project_status === 'approved') {
             htmlPath = path.join(
                 __dirname,
                 '..',
                 'views',
-                'projectstatus.html'
+                'projectaccptedstatus.html'
             );
-        } else {
+            html = await fs.readFile(htmlPath, 'utf8');
+
+            name = emailData.name;
+        }
+        if (emailData.project_status === 'rejected') {
             htmlPath = path.join(
                 __dirname,
                 '..',
                 'views',
-                'projectstatusArabic.html'
+                'projectrejectionstatus.html'
             );
+            html = await fs.readFile(htmlPath, 'utf8');
+
+            name = emailData.name;
+            note = emailData.note;
+        }
+        if (emailData.project_status === 'modification_required') {
+            htmlPath = path.join(
+                __dirname,
+                '..',
+                'views',
+                'projectmodificationstatus.html'
+            );
+            html = await fs.readFile(htmlPath, 'utf8');
+
+            name = emailData.name;
+            note = emailData.note;
         }
 
-        const html = await fs.readFile(htmlPath, 'utf8');
-
-        const name = emailData.name;
-        const project_name = emailData.project_name;
-        const project_status = emailData.project_status;
-
-        const populatedHtml = html
-            .replace('${name}', name)
-            .replace('${projectName}', project_name)
-            .replace('${projectStatus}', project_status);
+        let populatedHtml = html.replace('${name}', name);
+        if (note) {
+            populatedHtml = populatedHtml.replace('${note}', note);
+        }
 
         const msg = {
             to: emailData.email,
@@ -101,7 +118,7 @@ class GridEmailService {
                 __dirname,
                 '..',
                 'views',
-                'registerTemplateArabic.html'
+                'registerTemplate.html'
             );
         }
 
@@ -114,7 +131,7 @@ class GridEmailService {
         const msg = {
             to: emailData.email,
             from: 'amani@aiqatar.qa',
-            subject: 'Registration Email',
+            subject: 'Subject: Registration Successful',
             html: populatedHtml
         };
 
@@ -128,12 +145,7 @@ class GridEmailService {
             htmlPath = path.join(__dirname, '..', 'views', 'payment.html');
         }
         if (emailData.language === 'ar') {
-            htmlPath = path.join(
-                __dirname,
-                '..',
-                'views',
-                'paymentArabic.html'
-            );
+            htmlPath = path.join(__dirname, '..', 'views', 'payment.html');
         }
 
         const html = await fs.readFile(htmlPath, 'utf8');
@@ -164,12 +176,7 @@ class GridEmailService {
             htmlPath = path.join(__dirname, '..', 'views', 'contact.html');
         }
         if (emailData.language === 'ar') {
-            htmlPath = path.join(
-                __dirname,
-                '..',
-                'views',
-                'contactArabic.html'
-            );
+            htmlPath = path.join(__dirname, '..', 'views', 'contact.html');
         }
 
         const html = await fs.readFile(htmlPath, 'utf8');
@@ -182,7 +189,7 @@ class GridEmailService {
             .replace('${note}', note);
 
         const msg = {
-            to: 'anzalabidi@gmailcom',
+            to: 'info@fozdeal.com',
             from: emailData.sender_email,
             subject: 'Contact Email',
             html: populatedHtml
