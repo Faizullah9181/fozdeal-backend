@@ -12,6 +12,8 @@ class GridEmailService {
             return true;
         } catch (error) {
             console.error(error);
+
+            console.log(JSON.stringify(error.response.body.errors));
             return false;
         }
     }
@@ -164,14 +166,13 @@ class GridEmailService {
         const populatedHtml = html.replace('${note}', note);
 
         const msg = {
-            to: 'info@fozdeal.com',
+            to: 'amani@aiqatar.qa',
             from: emailData.sender_email,
             subject: 'Contact Email',
             html: populatedHtml
         };
 
         const response = await this.sendEmail(msg);
-
         return response;
     }
 
