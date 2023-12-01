@@ -49,6 +49,16 @@ class TransactionsService {
             language: language
         });
 
+        if (status === 'paid') {
+            const emailData = {
+                name: getUserEmail.first_name,
+                email: getUserEmail.email,
+                language: language
+            };
+
+            await emalService.sendProductUploadEmail(emailData);
+        }
+
         await transactionRepository.updateTransaction(
             {
                 status: status

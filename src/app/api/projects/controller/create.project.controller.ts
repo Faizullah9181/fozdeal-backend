@@ -7,7 +7,6 @@ import { ProjectMediaStatus } from '../../../enums/ProjectMediaStatus';
 import { SubCategoryStatus } from '../../../enums/Category';
 import { GeoStatus } from '../../../enums/GeoStatus';
 import { ProjectSizeStatus } from '../../../enums/ProjectSizeStatus';
-import emailService from '../../../common/email.service';
 
 const {
     MasterController,
@@ -95,15 +94,7 @@ export default class CreateProjectController extends MasterController {
             project_size,
             language
         });
-        if (response) {
-            const emailData = {
-                name: user.first_name,
-                email: user.email,
-                language: language
-            };
 
-            await emailService.sendProductUploadEmail(emailData);
-        }
         return new this.ResponseBuilder(
             StatusCodes.SUCCESS,
             response,
