@@ -26,14 +26,15 @@ export default class ForgotPasswordController extends MasterController {
         const payload = new RequestBuilder();
         payload.addToBody(
             Joi.object().keys({
-                email: Joi.string().email().required()
+                email: Joi.string().email().required(),
+                language: Joi.string().valid('en', 'ar').required()
             })
         );
         return payload;
     }
 
     async controller() {
-        const { email } = this.data;
+        const { email, language } = this.data;
         const user = await authService.getUserFromEmailAndRole(email);
         if (!user) {
             return new this.ResponseBuilder(
@@ -45,7 +46,8 @@ export default class ForgotPasswordController extends MasterController {
         const token = await authService.generateForgotPasswordToken(user);
         const emailData = {
             email: email,
-            token: token['reset-token']
+            token: token['reset-token'],
+            language: language
         };
         const response = await GridEmailService.sendForgotPasswordEmail(
             emailData

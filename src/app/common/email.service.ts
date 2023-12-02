@@ -18,35 +18,6 @@ class GridEmailService {
         }
     }
 
-    async sendForgotPasswordEmail(emailData) {
-        const token = emailData.token;
-
-        const msg = {
-            to: emailData.email,
-            from: 'amani@aiqatar.qa',
-            subject: 'Forgot Password Email',
-            html: `
-                <!-- Forgot Password Email Template -->
-                <div class="container">
-                    <h1>Forgot Password Email</h1>
-                    <p>You are receiving this email because we received a password reset request for your account.</p>
-                    <p>Click on the follwing button given below to reset your password:</p>
-                    <a href="${process.env.DOMAIN_URL}/reset-password/${token}">Reset Password</a>
-                </div>
-
-                <div class="container" dir="rtl" lang="ar">
-                    <h1>رسالة نسيان كلمة المرور</h1>
-                    <p>تلقيت هذا البريد الإلكتروني لأننا تلقينا طلب إعادة تعيين كلمة المرور الخاصة بحسابك.</p>
-                    <p>انقر فوق الزر أدناه لإعادة تعيين كلمة المرور الخاصة بك:</p>
-                    <a href="${process.env.DOMAIN_URL}/reset-password/${token}">إعادة تعيين كلمة المرور</a>
-                </div>
-            `
-        };
-
-        const response = await this.sendEmail(msg);
-        return response;
-    }
-
     async sendProjectStatusEmail(emailData) {
         let htmlPath;
         let html;
@@ -300,6 +271,47 @@ class GridEmailService {
 
         const response = await this.sendEmail(msg);
 
+        return response;
+    }
+
+    async sendForgotPasswordEmail(emailData) {
+        const token = emailData.token;
+        let htmlPtah;
+        let html;
+
+        if (emailData.language === 'en') {
+            htmlPtah = path.join(
+                __dirname,
+                '..',
+                'views',
+                'forgotPassword.html'
+            );
+            html = await fs.readFile(htmlPtah, 'utf8');
+        } else {
+            htmlPtah = path.join(
+                __dirname,
+                '..',
+                'views',
+                'forgotPasswordArabic.html'
+            );
+            html = await fs.readFile(htmlPtah, 'utf8');
+        }
+
+        const url = `${process.env.DOMAIN_URL}/reset-password/${token}`;
+        const populatedHtml = html.replace('${url}', url);
+
+        const msg = {
+            to: emailData.email,
+            from: 'amani@aiqatar.qa',
+            subject:
+                emailData.language === 'en'
+                    ? 'Forgot Password Email'
+                    : 'رسالة نسيت كلمة المرور',
+
+            html: populatedHtml
+        };
+
+        const response = await this.sendEmail(msg);
         return response;
     }
 }
