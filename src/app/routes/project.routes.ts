@@ -13,6 +13,7 @@ import GetDetailsForEnterPrenuerController from '../api/projects/controller/get.
 import GetProjectDataController from '../api/projects/controller/get.projects.data.controller';
 import CreateBuyInvestMentController from '../api/transactions/controller/create.subscription.controller';
 import ContactEmailSenderController from '../api/auth/contactEmail/create.email.for.admin.controller';
+import CreateSignedUrlController from '../api/projects/controller/create.signed.url.controller';
 module.exports = function (app: any) {
     CreateProjectController.post(app, '/api/v1/project/create', [
         Auth.userToken
@@ -67,4 +68,6 @@ module.exports = function (app: any) {
     CreateBuyInvestMentController.get(app, '/api/v1/buy', [Auth.userToken]);
 
     ContactEmailSenderController.post(app, '/api/v1/contactEmail', []);
+
+    CreateSignedUrlController.post(app, '/api/v1/project/signedUrl', []);
 };

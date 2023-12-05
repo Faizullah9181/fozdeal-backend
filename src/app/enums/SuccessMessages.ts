@@ -19,5 +19,6 @@ export enum SuccessMessages {
     FORGOT_PASSWORD_EMAIL_SENT = 'Forgot password email sent successfully',
     PASSWORD_RESET_SUCCESS = 'Password reset successfully',
     CATEGORY_FETCHED = 'Category fetched successfully',
-    PROJECT_INVESTED = 'Project invested successfully'
+    PROJECT_INVESTED = 'Project invested successfully',
+    SIGNED_URL_CREATED = 'Signed url created successfully'
 }
