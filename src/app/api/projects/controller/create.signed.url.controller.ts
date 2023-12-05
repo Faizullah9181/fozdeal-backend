@@ -32,11 +32,11 @@ export default class CreateSignedUrlController extends MasterController {
     }
 
     async controller() {
-        const { image_count } = this.data;
+        const { user, image_count } = this.data;
 
         let response = null;
         for (let i = 0; i < image_count; i++) {
-            const signedUrl = await S3Service.create();
+            const signedUrl = await S3Service.create({ user_id: user.id });
             if (response === null) {
                 response = [];
             }

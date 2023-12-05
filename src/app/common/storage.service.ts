@@ -14,9 +14,10 @@ class S3Service {
         return config;
     }
 
-    async create() {
+    async create(data) {
         const config = await this.setConfig();
-        const objectKey = uuidv4();
+        const user_id = data.user_id.toString();
+        const objectKey = `${user_id}/${uuidv4()}`;
 
         const signedUrl = await getSignedUrl(
             config,
@@ -31,7 +32,7 @@ class S3Service {
 
         return {
             put_url: signedUrl,
-            get_url: `https://${process.env.R2_BUCKET}.s3.amazonaws.com/${objectKey}`
+            get_url: `${process.env.R2_PUBLIC_URL}/${objectKey}`
         };
     }
 }
