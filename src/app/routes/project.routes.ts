@@ -69,5 +69,7 @@ module.exports = function (app: any) {
 
     ContactEmailSenderController.post(app, '/api/v1/contactEmail', []);
 
-    CreateSignedUrlController.post(app, '/api/v1/project/signedUrl', []);
+    CreateSignedUrlController.post(app, '/api/v1/project/signedUrl', [
+        Auth.userToken
+    ]);
 };
