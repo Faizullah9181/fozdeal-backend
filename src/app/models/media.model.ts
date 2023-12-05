@@ -13,7 +13,7 @@ import { ProjectMediaStatus } from '../enums/ProjectMediaStatus';
 @Table
 export default class ProjectMedia extends Model<ProjectMedia> {
     @Column({
-        type: DataType.STRING(128),
+        type: DataType.STRING(1024),
         allowNull: false
     })
     url: string;
