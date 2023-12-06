@@ -5,6 +5,7 @@ import { ErrorMessages } from '../../../../enums/ErrorMessages';
 import { StatusCodes } from '../../../../enums/StatusCode';
 import { SuccessMessages } from '../../../../enums/SuccessMessages';
 import userService from '../services/user.service';
+import userRepository from '../../../../repository/user.repository';
 
 const {
     MasterController,
@@ -60,8 +61,12 @@ export default class UserRegisterController extends MasterController {
             language
         } = this.data;
         let user = await authService.getUserFromEmailAndRole(email);
+        const phone = await userRepository.findUser({ phone: phone_number });
         if (user) {
             throw new ValidationError(ErrorMessages.USER_ALREADY_EXISTS);
+        }
+        if (phone) {
+            throw new ValidationError(ErrorMessages.PHONE_ALREADY_EXISTS);
         }
         const response = await userService.registerUser({
             first_name,
