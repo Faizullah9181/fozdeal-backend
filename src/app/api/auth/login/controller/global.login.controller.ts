@@ -26,7 +26,7 @@ export default class LoginController extends MasterController {
         payload.addToBody(
             Joi.object().keys({
                 email: Joi.string().email().required(),
-                password: Joi.string().min(8).max(20).required()
+                password: Joi.string().required()
             })
         );
         return payload;
