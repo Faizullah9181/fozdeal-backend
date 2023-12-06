@@ -25,7 +25,7 @@ export default class AuthResetPasswordController extends MasterController {
         const payload = new RequestBuilder();
         payload.addToBody(
             Joi.object().keys({
-                password: Joi.string().min(8).max(20).required()
+                password: Joi.string().required()
             })
         );
         return payload;
