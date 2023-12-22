@@ -1,5 +1,6 @@
 import CommonRepository from '../utils/common.repository';
 import Invest from '../models/invest.model';
+
 class InvestMentRepository extends CommonRepository {
     async createInvestment(data: any) {
         const result = await Invest.create(data);
