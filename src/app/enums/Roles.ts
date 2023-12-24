@@ -2,7 +2,8 @@ export enum Roles {
     SUPER_ADMIN = 'super-admin',
     ADMIN = 'admin',
     INVESTOR = 'investor',
-    ENTERPRENEUR = 'entrepreneur'
+    ENTERPRENEUR = 'entrepreneur',
+    CONSULTANT = 'consultant'
 }
 
 export enum STATUS {

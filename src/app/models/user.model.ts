@@ -22,6 +22,12 @@ export default class User extends Model<User> {
     country_code: number;
 
     @Column({
+        type: DataType.STRING(128),
+        allowNull: true
+    })
+    country: number;
+
+    @Column({
         type: DataType.STRING(50),
         allowNull: true
     })
@@ -53,6 +59,20 @@ export default class User extends Model<User> {
         allowNull: true
     })
     role: string;
+    // is consultant boolean default will be false
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: true,
+        defaultValue: false
+    })
+    isConsultant: boolean;
+
+    // add field for consultant id
+    @Column({
+        type: DataType.STRING,
+        allowNull: true
+    })
+    consultant_id: string;
 
     @Column({
         type: DataType.STRING,

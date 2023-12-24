@@ -64,6 +64,7 @@ export default class UserRegisterController extends MasterController {
         } = this.data;
         let user = await authService.getUserFromEmailAndRole(email);
         const phone = await userRepository.findUser({ phone: phone_number });
+
         if (user) {
             throw new ValidationError(ErrorMessages.USER_ALREADY_EXISTS);
         }

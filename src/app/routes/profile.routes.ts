@@ -7,6 +7,7 @@ import UpdateUserProfileController from '../api/auth/user/controllers/update.use
 import GetAllCategories from '../api/projects/controller/get.all.project.category.controller';
 
 import Auth from '../middlewares/Auth';
+
 module.exports = function (app) {
     GetSuperAdminDetails.get(app, '/api/auth/v1/user/superAdmin/profile', [
         Auth.superAdminToken
