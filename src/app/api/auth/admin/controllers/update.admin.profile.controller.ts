@@ -30,6 +30,7 @@ export default class UpdateAdminProfileController extends MasterController {
                 phone: Joi.string().required(),
                 about: Joi.string().required(),
                 country_code: Joi.string().required(),
+                country: Joi.string().required(),
                 gender: Joi.string().required()
             })
         );
@@ -44,6 +45,7 @@ export default class UpdateAdminProfileController extends MasterController {
             phone,
             about,
             country_code,
+            country,
             gender
         } = this.data;
         const response = await adminService.UpdateAdmin({
@@ -53,6 +55,7 @@ export default class UpdateAdminProfileController extends MasterController {
             phone,
             about,
             country_code,
+            country,
             gender
         });
         return new this.ResponseBuilder(

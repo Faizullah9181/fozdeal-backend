@@ -101,33 +101,4 @@ export class Config {
     static get utilityAuthenticationKey() {
         return process.env.UTILITY_AUTHENTICATION_KEY;
     }
-
-    static get razorpayDefaultConfig() {
-        return {
-            display: {
-                blocks: {
-                    custom: {
-                        name: 'Recommended Payment Methods',
-                        instruments: [
-                            {
-                                method: 'upi',
-                                flows: ['intent'],
-                                apps: ['phonepe']
-                            },
-                            {
-                                method: 'upi',
-                                flows: ['intent'],
-                                apps: ['google_pay']
-                            },
-                            { method: 'upi', flows: ['qr'] },
-                            { method: 'upi', flows: ['collect'] }
-                        ]
-                    }
-                },
-                hide: [],
-                sequence: ['block.custom'],
-                preferences: { show_default_blocks: true }
-            }
-        };
-    }
 }

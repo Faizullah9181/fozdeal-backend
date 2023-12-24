@@ -23,6 +23,12 @@ export default class User extends Model<User> {
 
     @Column({
         type: DataType.STRING(50),
+        allowNull: true
+    })
+    country: string;
+
+    @Column({
+        type: DataType.STRING(50),
         allowNull: true,
         unique: true
     })

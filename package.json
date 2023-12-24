@@ -67,7 +67,6 @@
         "pg": "^8.11.3",
         "pidusage": "^2.0.21",
         "prom-client": "^14.0.1",
-        "razorpay": "^2.8.4",
         "reflect-metadata": "^0.1.13",
         "response-time": "^2.3.2",
         "sequelize": "^6.19.0",

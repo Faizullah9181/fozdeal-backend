@@ -1,9 +1,9 @@
 {
-  "development": {
-    "username": "root",
-    "password": "qP3LO5dNiGpwfRuVQs0m",
-    "database": "railway",
-    "host": "containers-us-west-116.railway.app",
-    "dialect": "mysql"
-  }
+    "development": {
+        "username": "fozdeal",
+        "password": "5L55yx1qghEnMRx26v2XbqbhDAcPgR0p",
+        "database": "fozdeal",
+        "host": "dpg-clcan6mg1b2c73et5aa0-a.oregon-postgres.render.com",
+        "dialect": "postgres"
+    }
 }

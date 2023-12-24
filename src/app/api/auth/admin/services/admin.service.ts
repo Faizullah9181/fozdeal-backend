@@ -16,6 +16,7 @@ class AdminService {
                 phone: data.phone,
                 about: data.about,
                 country_code: data.country_code,
+                country: data.country,
                 gender: data.gender
             },
             data.user_id

@@ -10,6 +10,7 @@ class LoginService {
         const user = await userRepository.findUser({
             email
         });
+
         if (!user) {
             throw new ValidationError(ErrorMessages.USER_DETAILS_NOT_FOUND);
         }

@@ -40,6 +40,7 @@ export default class GetUserDetails extends MasterController {
             }
         }
         const response = await userService.getUser(user.id);
+        console.log('response', response);
         return new this.ResponseBuilder(
             StatusCodes.SUCCESS,
             response,

@@ -39,6 +39,7 @@ export default class UserRegisterController extends MasterController {
                     .valid(Roles.ENTERPRENEUR, Roles.INVESTOR)
                     .required(),
                 country_code: Joi.string().required(),
+                country: Joi.string(),
                 phone_number: Joi.string(),
                 about: Joi.string(),
                 language: Joi.string().valid('en', 'ar').required()
@@ -55,6 +56,7 @@ export default class UserRegisterController extends MasterController {
             password,
             user_type,
             country_code,
+            country,
             about,
             phone_number,
             gender,
@@ -76,6 +78,7 @@ export default class UserRegisterController extends MasterController {
             role: user_type,
             phone: phone_number,
             country_code,
+            country,
             about,
             gender,
             language

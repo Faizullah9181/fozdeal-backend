@@ -87,7 +87,8 @@ class UserRepository extends CommonRepository {
                 'last_name',
                 'phone',
                 'about',
-                'country_code'
+                'country_code',
+                'country'
             ]
         });
     }

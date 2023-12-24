@@ -6,6 +6,7 @@ export interface IUserRegister {
     role: string;
     phone: string;
     country_code: string;
+    country: string;
     about: string;
     gender: string;
     language: string;
