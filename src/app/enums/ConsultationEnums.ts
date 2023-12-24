@@ -1,11 +1,5 @@
-// GENDERE Enums
-export enum GENDERE {
-    MEN = 'men',
-    WOMEN = 'women'
-}
-
 // status of the consultation active , inactive, rejected, pending
-export enum CONSULTANTION_STATUS {
+export enum CONSULTATION_STATUS {
     ACTIVE = 'active',
     INACTIVE = 'inactive',
     REJECTED = 'rejected',

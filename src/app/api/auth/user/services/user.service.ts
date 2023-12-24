@@ -17,6 +17,11 @@ class UserService {
         const result = await userRepository.findUser(data);
         return result;
     }
+    // get user with email
+    async getUserFromEmail(email: string) {
+        const result = await userRepository.findUser({ email: email });
+        return result;
+    }
 
     async updateUser(data: any) {
         const user = await userRepository.findUser({ id: data.user_id });
