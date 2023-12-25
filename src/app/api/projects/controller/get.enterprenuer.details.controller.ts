@@ -34,16 +34,19 @@ export default class GetDetailsForEnterPrenuerController extends MasterControlle
 
     async controller() {
         const { user, project_id } = this.data;
+        const isSubscribe = await userRepository.findUser({
+            id: user.id
+        });
 
-        if (user.role !== 'investor') {
+        if (
+            user.role !== 'investor' &&
+            user.role !== 'superAdmin' &&
+            user.role !== 'admin'
+        ) {
             throw new ValidationError(
                 'Only investor can get details of enterprenuer'
             );
         }
-
-        const isSubscribe = await userRepository.findUser({
-            id: user.id
-        });
 
         const response = await ProjectService.getDetailForEnterprenuer({
             project_id,
