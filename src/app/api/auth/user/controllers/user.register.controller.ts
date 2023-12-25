@@ -36,7 +36,7 @@ export default class UserRegisterController extends MasterController {
                 password: Joi.string().required(),
                 gender: Joi.string(),
                 user_type: Joi.string()
-                    .valid(Roles.ENTERPRENEUR, Roles.INVESTOR)
+                    .valid(Roles.ENTERPRENEUR, Roles.INVESTOR, Roles.CONSULTANT)
                     .required(),
                 country_code: Joi.string().required(),
                 phone_number: Joi.string(),
@@ -81,6 +81,7 @@ export default class UserRegisterController extends MasterController {
             gender,
             language
         });
+        response.password = undefined;
         return new this.ResponseBuilder(
             StatusCodes.SUCCESS,
             response,

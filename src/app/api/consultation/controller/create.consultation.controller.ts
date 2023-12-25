@@ -110,6 +110,7 @@ export default class CreateConsultationController extends MasterController {
         });
 
         user.consultant_id = newConsultant.id;
+        user.isConsultant = true;
         // save the user
         await user.save();
 
