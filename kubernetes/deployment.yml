@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: orca-boilerplate
-  namespace: default
+    name: orca-boilerplate
+    namespace: default
 spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: orca-boilerplate
-  template:
-    metadata:
-      labels:
-        app: orca-boilerplate
-    spec:
-      containers:
-        - name: orca-boilerplate
-          image: 445976292670.dkr.ecr.ap-south-1.amazonaws.com/orca-whitelabelapi-preprod
-          ports:
-            - containerPort: 8085
+    replicas: 2
+    selector:
+        matchLabels:
+            app: orca-boilerplate
+    template:
+        metadata:
+            labels:
+                app: orca-boilerplate
+        spec:
+            containers:
+                - name: orca-boilerplate
+                  image: 445976292670.dkr.ecr.ap-south-1.amazonaws.com/orca-whitelabelapi-preprod
+                  ports:
+                      - containerPort: 8085

@@ -19,6 +19,11 @@ class ConsultantService {
         const result = await consultantRepository.getConsultant(filter);
         return result;
     }
+    // update consultant by id
+    async updateConsultant(data: any) {
+        const result = await consultantRepository.updateConsultant(data);
+        return result;
+    }
 }
 
 export default new ConsultantService();

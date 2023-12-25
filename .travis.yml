@@ -1,13 +1,13 @@
 language: node_js
 sudo: required
 services:
-  - docker
+    - docker
 node_js:
-  - "12.9.0"
+    - '12.9.0'
 jobs:
-  include:
-    - stage: unit
-      script:
-        - npm install
-        - npm run build
-        - npm run test
+    include:
+        - stage: unit
+          script:
+              - npm install
+              - npm run build
+              - npm run test

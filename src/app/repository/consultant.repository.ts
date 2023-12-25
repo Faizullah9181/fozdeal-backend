@@ -208,6 +208,10 @@ class ConsultantRepository extends CommonRepository {
     async getConsultant(filter: {}) {
         return Consultant.findOne({ where: filter });
     }
+    // update consultant by id
+    async updateConsultant(data) {
+        return Consultant.update(data, { where: { id: data.id } });
+    }
 }
 
 export default new ConsultantRepository();
